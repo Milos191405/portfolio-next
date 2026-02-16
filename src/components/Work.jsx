@@ -63,7 +63,7 @@ const dataProjects = [
 • Clustered team data by playing style and efficiency
 • Generated ranking and prediction insights
 • Built scatter plots and heatmaps for comparison`,
-    technologies: ["SQL", "Data Analysis"],
+    technologies: ["SQL", "Python", "Power BI"],
     backgroundImage: Bundesliga,
     link: "#",
     github: "https://github.com/Milos191405/Bundesliga-2023-2024/blob/master/README.md"

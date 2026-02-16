@@ -45,7 +45,7 @@ function Home({ isNavOpen }) {
         <div className="space-y-4 py-6">
           <FadeIn delay={0.6}>
             <p className="text-sm sm:text-base xl:text-xl text-text-primary">
-              I'm a web developer with 2+ years of experience, combining technical creativity with analytical thinking. A former athlete and lifelong tech enthusiast, I’m passionate about building intuitive, responsive web solutions and using data to tell powerful stories.
+             I’m a web developer with 2+ years of experience, combining frontend development with analytical thinking. A former athlete and lifelong tech enthusiast, I’m passionate about building intuitive, responsive applications and turning data into clear, actionable insights.
             </p>
           </FadeIn>
         </div>
