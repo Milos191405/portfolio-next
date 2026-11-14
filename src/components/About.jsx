@@ -25,18 +25,18 @@ const About = ({ isNavOpen, lang = "en" }) => {
       id="about"
       className={`w-full ${
         isNavOpen ? "min-h-[calc(100vh-80px)]" : "min-h-screen"
-      } bg-[#0a192f] text-gray-200 flex items-center justify-center py-20`}
+      } bg-[#0a192f] text-gray-200 flex items-center justify-center py-20 border-t border-slate-800/60`}
       aria-labelledby="about-heading"
     >
       <div className="w-full md:max-w-[700px] xl:max-w-[1200px] mx-auto px-6">
         <div className="w-full grid grid-cols-1 xl:grid-cols-12 gap-10 xl:gap-12 items-start">
-          {/* LEVA KOLONA */}
+          {/* LEFT COLUMN */}
           <div className="xl:col-span-6 space-y-5">
             <FadeIn>
               <div className="mb-6">
                 <h2
                   id="about-heading"
-                  className="text-2xl md:text-3xl font-bold inline border-b-2 border-blue-600 pb-1 text-white"
+                  className="text-2xl md:text-3xl font-bold inline border-b-2 border-blue-500 pb-1 text-white"
                 >
                   {t.heading}
                 </h2>
@@ -52,11 +52,11 @@ const About = ({ isNavOpen, lang = "en" }) => {
             ))}
           </div>
 
-          {/* DESNA KOLONA */}
+          {/* RIGHT COLUMN */}
           <div className="xl:col-span-6">
             <FadeIn delay={0.1}>
               <div className="mb-6">
-                <h3 className="text-2xl md:text-3xl font-bold inline border-b-2 border-blue-600 pb-1 text-white">
+                <h3 className="text-2xl md:text-3xl font-bold inline border-b-2 border-blue-500 pb-1 text-white">
                   {t.journeyTitle}
                 </h3>
               </div>
@@ -65,8 +65,8 @@ const About = ({ isNavOpen, lang = "en" }) => {
             <div className="space-y-4">
               {t.journey.map((step, idx) => (
                 <FadeIn key={idx} delay={0.2 + idx * 0.12}>
-                  <div className="flex items-start gap-4 p-4 rounded-xl bg-[#112240]/80 border border-slate-700/70 hover:border-blue-500/50 transition-colors shadow-md">
-                    <div className="w-10 h-10 rounded-lg bg-[#0a192f] border border-slate-700 flex items-center justify-center shrink-0 mt-0.5">
+                  <div className="flex items-start gap-4 p-4 rounded-xl bg-[#112240]/70 border border-slate-800 hover:border-blue-500/40 transition-colors shadow-lg">
+                    <div className="w-10 h-10 rounded-lg bg-[#0a192f] border border-slate-700/80 flex items-center justify-center shrink-0 mt-0.5">
                       {renderJourneyIcon(step.icon)}
                     </div>
                     <div>

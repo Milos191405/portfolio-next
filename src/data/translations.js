@@ -3,9 +3,9 @@ export const translations = {
     nav: {
       links: [
         { to: "home", label: "Home" },
-        { to: "about", label: "About" },
+        { to: "work", label: "Projects" },
         { to: "skills", label: "Skills" },
-        { to: "work", label: "Work" },
+        { to: "about", label: "About" },
         { to: "contact", label: "Contact" },
       ],
       cvLabel: "Download CV",
@@ -13,76 +13,53 @@ export const translations = {
       certLabel: "Certificates",
     },
     home: {
-      greeting: "Hi, my name is",
-      name: "Milos Mirkovic",
-      headline: "Data Analyst | Power BI • SQL • Python • Microsoft Fabric",
-      tagline: "📊 Data Analyst | 🧠 Critical Thinker | 🎾 Ex-Athlete",
+      badge: "DATA ANALYST & ANALYTICS ENGINEER",
+      firstName: "Milos",
+      lastName: "Mirkovic",
+      headline: "Power BI • SQL • Python • Microsoft Fabric",
       intro:
-        "I turn raw, complex data into validated models, relational Star Schemas, and actionable insights. Combining 2+ years of remote software engineering experience with analytical rigor and structured problem-solving.",
-      skills: [
-        "Python",
-        "SQL",
-        "PostgreSQL",
-        "Power BI",
-        "DAX",
-        "Microsoft Fabric",
-        "React",
-        "TypeScript",
-      ],
-      prompt: "Curious to see what I’ve been working on?",
-      highlights: [
-        {
-          title: "Certified Data & Analytics Engineer",
-          description:
-            "Microsoft Certified in Fabric Analytics (DP-600) & Power BI (PL-300), plus DataCamp SQL Associate — currently preparing DP-700.",
-        },
-        {
-          title: "Software Developer at Kontera Soft (Remote)",
-          description:
-            "Worked remotely for 2+ years integrating PostgreSQL/MongoDB databases, REST/GraphQL APIs, and building responsive data-driven apps.",
-        },
-        {
-          title: "End-to-End Analytics & Quality Focus",
-          description:
-            "Combining engineering discipline with analytical storytelling to build clean ETL pipelines and intuitive executive dashboards.",
-        },
-      ],
-      ctaProjects: "View My Work",
-      ctaCv: "Download CV",
-      snapshotTitle: "ATP 2024 • Analytics Snapshot",
-      certificationsTitle: "Verified Certifications",
+        "I turn raw, complex data into validated models, relational Star Schemas, and actionable insights. Combining 3 years of remote frontend & software engineering and 20+ years of international coaching leadership with modern data analytics.",
+      certificationsTitle: "VERIFIED CREDENTIALS & CERTIFICATIONS",
       certifications: [
         {
           code: "DP-600",
-          name: "Fabric Analytics Engineer Associate",
-          status: "Passed",
+          name: "Microsoft Certified: Fabric Analytics Engineer Associate (DP-600)",
+          status: "PASSED",
           inProgress: false,
         },
         {
           code: "PL-300",
-          name: "Power BI Data Analyst Associate",
-          status: "Passed",
+          name: "Microsoft Certified: Power BI Data Analyst Associate (PL-300)",
+          status: "PASSED",
           inProgress: false,
         },
         {
           code: "SQL",
-          name: "DataCamp SQL Data Analyst Associate",
-          status: "Certified",
+          name: "SQL Data Analyst Associate (DataCamp)",
+          status: "CERTIFIED",
           inProgress: false,
         },
         {
           code: "DP-700",
-          name: "Fabric Data Engineer Associate",
-          status: "In Progress",
+          name: "Microsoft Certified: Fabric Data Engineer Associate (DP-700)",
+          status: "IN PROGRESS",
           inProgress: true,
         },
       ],
+      ctaProjects: "View My Projects",
+      ctaContact: "Contact Me",
+      location: "Based in Ketsch, Germany",
+      availability: "Open to Remote / Hybrid",
+      quote: "“Data turns experience into insight.”",
+      quoteSub: "End-to-End Analytics • Validation • BI Storytelling",
+      snapshotTitle: "ATP 2024 • ANALYTICS SNAPSHOT",
+      surfaceLabel: "Win Rate by Surface",
     },
     about: {
       heading: "About Me",
       paragraphs: [
         "I’m a Data Analyst and Analytics Engineer with a software development background, focused on turning raw, unstructured data into validated insights through SQL, Python, Power BI, and Microsoft Fabric.",
-        "Before specializing in data analytics, I worked remotely for over two years as a Frontend Developer, giving me a practical understanding of databases, REST/GraphQL APIs, and how data-driven applications operate end-to-end.",
+        "Before specializing in data analytics, I worked remotely for three years (Jan 2022 – Oct 2024) as a Frontend Developer, giving me a practical understanding of databases, REST/GraphQL APIs, and how data-driven applications operate end-to-end.",
         "My earlier 20-year career as a professional tennis player, head coach, and program director shaped my approach to problem-solving: disciplined, detail-oriented, and focused on objective performance evaluation.",
         "I’m particularly interested in the intersection of data engineering and clear visual storytelling — ensuring high data quality first, then building intuitive dashboards that drive confident decisions.",
       ],
@@ -102,7 +79,7 @@ export const translations = {
         },
         {
           role: "Frontend Developer (Remote)",
-          period: "2022 – 2024 • Kontera SOFT",
+          period: "Jan 2022 – Oct 2024 • Kontera SOFT",
           desc: "Built responsive React & Next.js web applications, integrated PostgreSQL/MongoDB databases, and improved performance (+25% Lighthouse).",
           icon: "code",
         },
@@ -172,6 +149,29 @@ export const translations = {
       otherHeading: "Other Projects & Web Development",
       featuredProjects: [
         {
+          id: "wct",
+          name: "Warehouse Control Tower (Heidelberg DC Simulation)",
+          statusBadge: "IN PROGRESS • PHASE 3 (SQL)",
+          shortDescription:
+            "End-to-end Medallion (Bronze/Silver/Gold) warehouse analytics simulation of a 3-hall distribution center in Heidelberg (24,180 storage locations, 37,500 ABB-referenced SKUs, and 200,000 annual shipments).",
+          description: [
+            "Warehouse & Process Modeling (Completed): Modeled a realistic 3-hall distribution center with 24,180 storage positions (high racks, low pallet storage, vertical lifts) covering the full Order → Picking → Packing → Shipping flow.",
+            "Synthetic Data Engine in Python (Completed): Generated and validated 800K+ operational records scaled to 200,000 annual shipments (435K+ picking operations, 37,500 products based on public ABB master data dimensions & weights, 98.5% on-time delivery rate).",
+            "Medallion Pipeline in PostgreSQL (In Progress — Phase 3): Injecting controlled data-quality issues into the Bronze layer and engineering SQL transformations, referential integrity checks, and Star Schema models for Silver and Gold layers.",
+            "Upcoming Milestones (Phases 4–6): Building the Power BI Warehouse Control Tower (DAX KPIs & bottleneck analysis), migrating to Microsoft Fabric Lakehouse, and adding AI/ML demand forecasting & slotting optimization.",
+          ],
+          technologies: [
+            "Python",
+            "PostgreSQL",
+            "SQL",
+            "Power BI",
+            "Microsoft Fabric",
+            "Medallion Architecture",
+          ],
+          link: "#",
+          github: "https://github.com/Milos191405",
+        },
+        {
           id: "atp",
           name: "ATP Tennis Season 2024",
           shortDescription:
@@ -202,23 +202,16 @@ export const translations = {
           github:
             "https://github.com/Milos191405/Bundesliga-2023-2024/blob/master/README.md",
         },
+      ],
+      otherProjects: [
         {
-          id: "traffic",
           name: "Traffic Accident Analysis (Germany)",
           shortDescription:
-            "Exploratory data analysis and Prophet time-series forecasting on German transport datasets.",
-          description: [
-            "Analyzed national accident datasets (Destatis) across severity, locations, and seasons",
-            "Compared urban, rural, and motorway patterns alongside weather impacts",
-            "Built a Prophet time-series forecasting model validated with MAE/RMSE metrics",
-            "Exported structured forecasts and visual insights for risk assessment",
-          ],
+            "Exploratory data analysis and Prophet time-series forecasting on German transport datasets (Destatis).",
           technologies: ["Python", "Pandas", "Prophet ML", "EDA"],
           link: "#",
           github: "https://github.com/Milos191405",
         },
-      ],
-      otherProjects: [
         {
           name: "Job Market SQL Analysis",
           shortDescription:
@@ -244,14 +237,6 @@ export const translations = {
           technologies: ["Next.js", "Tailwind CSS", "JavaScript"],
           link: "https://psiholog-smilja-igic.vercel.app/",
           github: "https://github.com/Milos191405/psiholog_smilja_igic",
-        },
-        {
-          name: "YourMentorMate",
-          shortDescription:
-            "Mentoring platform with role-based auth, booking, and payment integration.",
-          technologies: ["React", "TypeScript", "Tailwind CSS"],
-          link: "https://mentor-mate-frontend.onrender.com/",
-          github: "https://github.com/Milos191405/mentor-mate",
         },
       ],
     },
@@ -282,9 +267,9 @@ export const translations = {
     nav: {
       links: [
         { to: "home", label: "Start" },
-        { to: "about", label: "Über mich" },
-        { to: "skills", label: "Skills" },
         { to: "work", label: "Projekte" },
+        { to: "skills", label: "Skills" },
+        { to: "about", label: "Über mich" },
         { to: "contact", label: "Kontakt" },
       ],
       cvLabel: "Lebenslauf",
@@ -292,77 +277,53 @@ export const translations = {
       certLabel: "Zertifikate",
     },
     home: {
-      greeting: "Hallo, mein Name ist",
-      name: "Milos Mirkovic",
-      headline: "Data Analyst | Power BI • SQL • Python • Microsoft Fabric",
-      tagline:
-        "📊 Data Analyst | 🧠 Analytischer Denker | 🎾 Ex-Leistungssportler",
+      badge: "DATA ANALYST & ANALYTICS ENGINEER",
+      firstName: "Milos",
+      lastName: "Mirkovic",
+      headline: "Power BI • SQL • Python • Microsoft Fabric",
       intro:
-        "Ich verwandle komplexe Rohdaten in validierte Datenmodelle, relationale Star-Schemas und aussagekräftige Erkenntnisse. Über 2 Jahre Remote-Erfahrung in der Softwareentwicklung kombiniert mit analytischer Präzision.",
-      skills: [
-        "Python",
-        "SQL",
-        "PostgreSQL",
-        "Power BI",
-        "DAX",
-        "Microsoft Fabric",
-        "React",
-        "TypeScript",
-      ],
-      prompt: "Neugierig, woran ich zuletzt gearbeitet habe?",
-      highlights: [
-        {
-          title: "Zertifizierter Data & Analytics Engineer",
-          description:
-            "Microsoft-zertifiziert in Fabric Analytics (DP-600) & Power BI (PL-300) sowie DataCamp SQL Associate — aktuell in Vorbereitung auf DP-700.",
-        },
-        {
-          title: "Softwareentwickler bei Kontera Soft (Remote)",
-          description:
-            "Über 2 Jahre Remote-Erfahrung in der Anbindung von PostgreSQL/MongoDB-Datenbanken, REST/GraphQL-APIs und datengetriebenen Web-Apps.",
-        },
-        {
-          title: "End-to-End-Analytik & Datenqualität",
-          description:
-            "Kombination aus technischer Präzision und Data Storytelling für saubere ETL-Pipelines und interaktive Management-Dashboards.",
-        },
-      ],
-      ctaProjects: "Projekte ansehen",
-      ctaCv: "Lebenslauf (PDF)",
-      snapshotTitle: "ATP 2024 • Analytics Snapshot",
-      certificationsTitle: "Zertifizierungen",
+        "Ich verwandle komplexe Rohdaten in validierte Datenmodelle, relationale Star-Schemas und fundierte Erkenntnisse. Rund 3 Jahre Remote-Erfahrung in der Frontend- & Softwareentwicklung und 20+ Jahre internationale Führungserfahrung kombiniert mit moderner Datenanalyse.",
+      certificationsTitle: "ZERTIFIZIERUNGEN & QUALIFIKATIONEN",
       certifications: [
         {
           code: "DP-600",
-          name: "Fabric Analytics Engineer Associate",
-          status: "Bestanden",
+          name: "Microsoft Certified: Fabric Analytics Engineer Associate (DP-600)",
+          status: "BESTANDEN",
           inProgress: false,
         },
         {
           code: "PL-300",
-          name: "Power BI Data Analyst Associate",
-          status: "Bestanden",
+          name: "Microsoft Certified: Power BI Data Analyst Associate (PL-300)",
+          status: "BESTANDEN",
           inProgress: false,
         },
         {
           code: "SQL",
-          name: "DataCamp SQL Data Analyst Associate",
-          status: "Zertifiziert",
+          name: "SQL Data Analyst Associate (DataCamp)",
+          status: "ZERTIFIZIERT",
           inProgress: false,
         },
         {
           code: "DP-700",
-          name: "Fabric Data Engineer Associate",
-          status: "In Vorbereitung",
+          name: "Microsoft Certified: Fabric Data Engineer Associate (DP-700)",
+          status: "IN VORBEREITUNG",
           inProgress: true,
         },
       ],
+      ctaProjects: "Projekte ansehen",
+      ctaContact: "Kontakt aufnehmen",
+      location: "Standort: Ketsch, Deutschland",
+      availability: "Offen für Remote / Hybrid",
+      quote: "„Daten verwandeln Erfahrung in Erkenntnis.“",
+      quoteSub: "End-to-End-Analytik • Datenvalidierung • BI Storytelling",
+      snapshotTitle: "ATP 2024 • ANALYTICS SNAPSHOT",
+      surfaceLabel: "Siegquote nach Belag",
     },
     about: {
       heading: "Über mich",
       paragraphs: [
         "Ich bin Data Analyst und Analytics Engineer mit einem Hintergrund in der Softwareentwicklung und konzentriere mich darauf, unstrukturierte Rohdaten mithilfe von SQL, Python, Power BI und Microsoft Fabric in fundierte Erkenntnisse zu übersetzen.",
-        "Vor meiner Spezialisierung auf Datenanalyse arbeitete ich über zwei Jahre remote als Frontend-Entwickler. Dadurch besitze ich ein tiefes Verständnis für Datenbanken, REST/GraphQL-APIs und durchgängige datengetriebene Anwendungen.",
+        "Vor meiner Spezialisierung auf Datenanalyse arbeitete ich rund drei Jahre (Jan. 2022 – Okt. 2024) remote als Frontend-Entwickler. Dadurch besitze ich ein tiefes Verständnis für Datenbanken, REST/GraphQL-APIs und durchgängige datengetriebene Anwendungen.",
         "Meine frühere 20-jährige Laufbahn als Leistungssportler, Cheftrainer und Programmdirektor hat meine Arbeitsweise geprägt: diszipliniert, detailorientiert und fokussiert auf objektive Leistungsbewertung.",
         "Besonders fasziniert mich die Verbindung aus sauberem Data Engineering und klarem Data Storytelling — höchste Datenqualität als Basis für intuitive Dashboards und fundierte Entscheidungen.",
       ],
@@ -382,7 +343,7 @@ export const translations = {
         },
         {
           role: "Frontend-Entwickler (Remote)",
-          period: "2022 – 2024 • Kontera SOFT",
+          period: "Jan. 2022 – Okt. 2024 • Kontera SOFT",
           desc: "Entwicklung responsiver React- & Next.js-Webanwendungen, Anbindung an PostgreSQL/MongoDB und Performance-Optimierung (+25 % Lighthouse).",
           icon: "code",
         },
@@ -452,6 +413,29 @@ export const translations = {
       otherHeading: "Weitere Projekte & Webentwicklung",
       featuredProjects: [
         {
+          id: "wct",
+          name: "Warehouse Control Tower (Logistikzentrum Heidelberg)",
+          statusBadge: "IN ARBEIT • PHASE 3 (SQL)",
+          shortDescription:
+            "End-to-End Medallion-Lageranalyse (Bronze/Silver/Gold) eines 3-Hallen-Distributionszentrums in Heidelberg (24.180 Lagerplätze, 37.500 Artikel auf ABB-Stammdatenbasis und 200.000 Sendungen pro Jahr).",
+          description: [
+            "Lager- & Prozessmodellierung (Abgeschlossen): Modellierung eines realistischen 3-Hallen-Logistikzentrums mit 24.180 Lagerplätzen (Hochregale, Palettenlager, Vertikallifte) entlang des gesamten Prozesses Order → Picking → Packing → Shipping.",
+            "Synthetischer Datengenerator in Python (Abgeschlossen): Generierung und Validierung von über 800.000 Betriebsdatensätzen skaliert auf 200.000 jährliche Sendungen (435.000+ Kommissionierungen, 37.500 Produkte auf Basis öffentlicher ABB-Artikelstammdaten, 98,5 % Liefertreue).",
+            "Medallion-Pipeline in PostgreSQL (In Arbeit — Phase 3): Simulation realer Datenqualitätsprobleme im Bronze-Layer sowie SQL-Transformationen, Datenbereinigung und Star-Schema-Modellierung für Silver- und Gold-Layer.",
+            "Nächste Meilensteine (Phasen 4–6): Aufbau des Power BI Warehouse Control Towers (DAX-KPIs & Engpassanalyse), Integration in Microsoft Fabric Lakehouse sowie KI/ML-Bestandsprognosen und Slotting-Optimierung.",
+          ],
+          technologies: [
+            "Python",
+            "PostgreSQL",
+            "SQL",
+            "Power BI",
+            "Microsoft Fabric",
+            "Medallion-Architektur",
+          ],
+          link: "#",
+          github: "https://github.com/Milos191405",
+        },
+        {
           id: "atp",
           name: "ATP Tennis Season 2024",
           shortDescription:
@@ -482,23 +466,16 @@ export const translations = {
           github:
             "https://github.com/Milos191405/Bundesliga-2023-2024/blob/master/README.md",
         },
+      ],
+      otherProjects: [
         {
-          id: "traffic",
           name: "Verkehrsunfallanalyse Deutschland",
           shortDescription:
             "Explorative Datenanalyse und Prophet-Zeitreihenprognose auf Basis von Destatis-Daten.",
-          description: [
-            "Analyse nationaler Unfalldaten nach Unfallart, Ortslage und Saisonalität",
-            "Vergleich von innerörtlichen, außerörtlichen und Autobahn-Unfallmustern",
-            "Zeitreihenprognose mit Prophet inkl. Validierung durch MAE/RMSE-Metriken",
-            "Strukturierte Aufbereitung und Visualisierung der Prognoseergebnisse",
-          ],
           technologies: ["Python", "Pandas", "Prophet ML", "EDA"],
           link: "#",
           github: "https://github.com/Milos191405",
         },
-      ],
-      otherProjects: [
         {
           name: "Job Market SQL Analysis",
           shortDescription:
@@ -524,14 +501,6 @@ export const translations = {
           technologies: ["Next.js", "Tailwind CSS", "JavaScript"],
           link: "https://psiholog-smilja-igic.vercel.app/",
           github: "https://github.com/Milos191405/psiholog_smilja_igic",
-        },
-        {
-          name: "YourMentorMate",
-          shortDescription:
-            "Mentoring-Plattform mit Authentifizierung, Buchungssystem und Zahlungen.",
-          technologies: ["React", "TypeScript", "Tailwind CSS"],
-          link: "https://mentor-mate-frontend.onrender.com/",
-          github: "https://github.com/Milos191405/mentor-mate",
         },
       ],
     },

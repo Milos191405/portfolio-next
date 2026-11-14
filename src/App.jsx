@@ -12,15 +12,17 @@ function App() {
   const [lang, setLang] = useState("en");
 
   return (
-    <>
+    <div className="bg-[#0a192f] min-h-screen w-full overflow-x-hidden text-gray-200 selection:bg-blue-500/30 selection:text-blue-200">
       <Navbar lang={lang} setLang={setLang} />
       <SocialSidebar lang={lang} />
-      <Home lang={lang} />
-      <About lang={lang} />
-      <Skills lang={lang} />
-      <Work lang={lang} />
-      <Contact lang={lang} />
-    </>
+      <main>
+        <Home lang={lang} />
+        <Work lang={lang} />
+        <Skills lang={lang} />
+        <About lang={lang} />
+        <Contact lang={lang} />
+      </main>
+    </div>
   );
 }
 
