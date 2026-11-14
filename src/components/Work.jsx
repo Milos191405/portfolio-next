@@ -1,224 +1,209 @@
 import FadeIn from "../components/FadeIn";
 import { motion } from "framer-motion";
 import { FaGithub, FaExternalLinkAlt } from "react-icons/fa";
+import { translations } from "../data/translations";
 
-import MentorMate from "../assets/Work/mentor.png";
-// import excel from "../assets/Work/excelConverter.png";
-import igraliste from "../assets/Work/igraliste.png";
-import Smilja from "../assets/Work/Smilja.png";
 import Bundesliga from "../assets/Work/Bundesliga.png";
-import Jobs from "../assets/Work/JobsAnalyse.png";
 import Properties from "../assets/Work/Properties.png";
+// Kada ubaciš slike za ATP i Traffic u src/assets/Work/, otkomentariši ove dve linije:
+// import ATP from "../assets/Work/ATP.png";
+// import Traffic from "../assets/Work/Traffic.png";
 
-const webProjects = [
-  {
-    name: "Psiholog Smilja Igic",
-    shortDescription: "Fully responsive psychologist website built with Next.js and optimized for SEO.",
-    description: `• Designed and developed a fully responsive website for a licensed psychologist
-• Built using Next.js, Tailwind CSS, and JavaScript
-• Implemented clean and accessible UI/UX with a focus on clarity and trust
-• Deployed via Vercel with optimized SEO and performance settings
-• Includes dynamic routing, contact form, and structured content sections`,
-    technologies: ["Next.js", "Tailwind CSS", "JavaScript"],
-    backgroundImage: Smilja,
-    link: "https://psiholog-smilja-igic.vercel.app/",
-    github: "https://github.com/Milos191405/psiholog_smilja_igic"
-  },
-  {
-    name: "YourMentorMate",
-    shortDescription: "Mentoring platform with role-based auth, booking, and payment integration.",
-    description: `• Built with React (Vite), TypeScript, CSS, and Tailwind CSS
-• Developed a mentoring platform for mentors and mentees
-• Implemented role-based authentication, calendar booking, and secure payments
-• Users receive automatic video call links upon booking
-• Focused on responsive design and intuitive UI/UX
-• Fully deployed but no longer actively maintained`,
-    technologies: ["React", "TypeScript", "Tailwind CSS"],
-    backgroundImage: MentorMate,
-    link: "https://mentor-mate-frontend.onrender.com/",
-    github: "https://github.com/Milos191405/mentor-mate"
-  },
-  {
-    name: "Igraliste",
-    shortDescription: "Playground site migrated from WordPress to modular React.",
-    description: `• Migrated an existing WordPress site for a children's playroom
-• Goal: make content like blogs and events easier to manage
-• Rebuilt layout with reusable components and Tailwind styling
-• Focused on structure, content separation, and scalability
-• Blog functionality planned for future updates
-• Considering transition to Next.js for static generation and SEO`,
-    technologies: ["React", "Tailwind CSS"],
-    backgroundImage: igraliste,
-    link: "https://igraliste.onrender.com/",
-    github: "https://github.com/Milos191405/igraliste"
-  }
-];
+const PROJECT_IMAGES = {
+  atp: Bundesliga, // Zameni sa ATP kada dodaš sliku
+  bundesliga: Bundesliga,
+  traffic: Properties, // Zameni sa Traffic kada dodaš sliku
+};
 
-const dataProjects = [
-  {
-    name: "Bundesliga 2023/24 Analysis",
-    shortDescription: "SQL-based team performance analysis with clustering and insights.",
-    description: `• Analyzed Bundesliga 2023/24 performance using SQL
-• Correlated metrics like shots, goals, and possession
-• Clustered team data by playing style and efficiency
-• Generated ranking and prediction insights
-• Built scatter plots and heatmaps for comparison`,
-    technologies: ["SQL", "Python", "Power BI"],
-    backgroundImage: Bundesliga,
-    link: "#",
-    github: "https://github.com/Milos191405/Bundesliga-2023-2024/blob/master/README.md"
-  },
-  {
-    name: "Job Market SQL Analysis",
-    shortDescription: "SQL analysis of 700k+ job posts to uncover salary and skill trends.",
-    description: `• Analyzed 700,000+ job postings in 2023 using SQL
-• Focused on salary, remote work, and degree requirements
-• Identified top-paying roles and key required skills
-• Explored trends in work-from-home and hybrid setups
-• Visualized results via pie charts and bar graphs`,
-    technologies: ["SQL", "Data Analysis"],
-    backgroundImage: Jobs,
-    link: "#",
-    github: "https://github.com/Milos191405/SQL-Job-Analyse/blob/main/README.md"
-  },
-  {
-    name: "House Sales Analysis",
-    shortDescription: "EDA on King County housing data using Python and visual tools.",
-    description: `• Used Python (pandas, numpy, matplotlib, seaborn) for EDA
-• Explored price gaps between waterfront and non-waterfront homes
-• Assessed renovation impact and build year on pricing
-• Mapped affordability by postal code
-• Cleaned missing values and handled outliers`,
-    technologies: ["Python", "Pandas", "Matplotlib"],
-    backgroundImage: Properties,
-    link: "#",
-    github: "https://github.com/Milos191405/Python-House-properties/blob/main/README.md"
-  }
-];
+const FeaturedProjectCard = ({ project, delay }) => {
+  const bgImage = PROJECT_IMAGES[project.id] || Bundesliga;
 
-const ProjectCard = ({ project, delay }) => (
-  <FadeIn delay={delay}>
-    <motion.div
-      className="relative group rounded-lg shadow-lg overflow-hidden h-full flex flex-col"
-      initial={{ opacity: 0, y: 40 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ duration: 1, delay }}
-    >
-      {/* Slika (klikabilna) */}
-      <a
-        href={project.link && project.link !== "#" ? project.link : project.github}
-        target="_blank"
-        rel="noopener noreferrer"
-        className="block"
+  return (
+    <FadeIn delay={delay}>
+      <motion.div
+        className="relative group rounded-2xl bg-[#112240]/90 border border-slate-700/70 hover:border-blue-500/60 shadow-xl overflow-hidden h-full flex flex-col transition-colors"
+        initial={{ opacity: 0, y: 30 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.7, delay }}
       >
-        <div
-          className="relative h-[200px] md:h-[300px] bg-cover bg-center transition-transform duration-500 group-hover:scale-105"
-          style={{ backgroundImage: `url(${project.backgroundImage})` }}
+        <a
+          href={
+            project.link && project.link !== "#" ? project.link : project.github
+          }
+          target="_blank"
+          rel="noopener noreferrer"
+          className="block overflow-hidden relative h-[200px] border-b border-slate-800"
         >
-          {/* Hover overlay sa opisom */}
-          <div className="hidden lg:absolute lg:inset-0 lg:bg-black/80 lg:backdrop-blur-sm lg:opacity-0 lg:group-hover:opacity-100 lg:transition lg:duration-500 lg:px-6 lg:py-4 lg:overflow-y-auto lg:flex lg:flex-col lg:justify-center">
-            <ul className="text-sm md:text-base text-gray-300 text-left list-disc list-inside space-y-1">
-              {project.description.split("\n").map((line, i) => (
-                <li key={i}>{line.replace(/^•\s*/, "")}</li>
+          <div
+            className="w-full h-full bg-cover bg-center transition-transform duration-500 group-hover:scale-105"
+            style={{ backgroundImage: `url(${bgImage})` }}
+          />
+          <div className="absolute inset-0 bg-[#0a192f]/95 backdrop-blur-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300 p-5 overflow-y-auto flex flex-col justify-center">
+            <ul className="text-xs md:text-sm text-gray-200 text-left list-disc list-inside space-y-1.5">
+              {project.description.map((line, i) => (
+                <li key={i}>{line}</li>
               ))}
             </ul>
           </div>
-        </div>
-      </a>
-
-      {/* Donji sadržaj */}
-      <div className="bg-[#0a192f] p-5 md:p-6 h-[200px] flex flex-col justify-between border border-gray-700 rounded-md">
-        {/* Naslov (klikabilan) */}
-        <a
-          href={project.link && project.link !== "#" ? project.link : project.github}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="hover:text-blue-400 transition-colors"
-        >
-          <h4 className="text-xl md:text-2xl font-bold text-white group-hover:text-blue-400 transition-colors">
-            {project.name}
-          </h4>
         </a>
 
-        <p className="text-sm md:text-base text-gray-300 mb-2">
-          {project.shortDescription}
-        </p>
-
-        <ul className="flex flex-wrap gap-2 text-xs md:text-sm text-blue-300">
-          {project.technologies.map((tech, index) => (
-            <li key={index}>{tech}</li>
-          ))}
-        </ul>
-
-        {/* Ikonice */}
-        <div className="flex gap-4 mt-4">
-          {project.link && project.link !== "#" && (
+        <div className="p-5 flex-1 flex flex-col justify-between">
+          <div>
             <a
-              href={project.link}
+              href={
+                project.link && project.link !== "#" ?
+                  project.link
+                : project.github
+              }
               target="_blank"
               rel="noopener noreferrer"
-              className="text-white hover:text-blue-400 transition"
-              aria-label="Live Project"
+              className="hover:text-blue-400 transition-colors"
             >
-              <FaExternalLinkAlt size={20} />
+              <h3 className="text-lg md:text-xl font-bold text-white group-hover:text-blue-400 transition-colors">
+                {project.name}
+              </h3>
             </a>
-          )}
-          {project.github && (
-            <a
-              href={project.github}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-white hover:text-blue-400 transition"
-              aria-label="GitHub Repository"
-            >
-              <FaGithub size={20} />
-            </a>
-          )}
+
+            <p className="text-xs md:text-sm text-gray-300 mt-2 leading-relaxed">
+              {project.shortDescription}
+            </p>
+          </div>
+
+          <div className="mt-4 pt-3 border-t border-slate-800/80 flex items-center justify-between gap-2">
+            <div className="flex flex-wrap gap-1.5">
+              {project.technologies.map((tech, index) => (
+                <span
+                  key={index}
+                  className="px-2.5 py-0.5 rounded bg-[#0a192f] border border-slate-700/80 text-[11px] font-medium text-blue-300"
+                >
+                  {tech}
+                </span>
+              ))}
+            </div>
+
+            <div className="flex items-center gap-3 shrink-0">
+              {project.link && project.link !== "#" && (
+                <a
+                  href={project.link}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-gray-300 hover:text-blue-400 transition"
+                  aria-label="Live Project"
+                >
+                  <FaExternalLinkAlt size={16} />
+                </a>
+              )}
+              {project.github && (
+                <a
+                  href={project.github}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-gray-300 hover:text-blue-400 transition"
+                  aria-label="GitHub Repository"
+                >
+                  <FaGithub size={18} />
+                </a>
+              )}
+            </div>
+          </div>
         </div>
-      </div>
-    </motion.div>
-  </FadeIn>
-);
+      </motion.div>
+    </FadeIn>
+  );
+};
 
-const Work = ({ isNavOpen }) => {
+const Work = ({ isNavOpen, lang = "en" }) => {
+  const t = (translations[lang] || translations.en).work;
+
   return (
     <section
       id="work"
       className={`w-full ${
         isNavOpen ? "min-h-[calc(100vh-80px)]" : "min-h-screen"
-      } bg-[#0a192f] text-gray-300 px-6 pt-20`}
+      } bg-[#0a192f] text-gray-300 px-6 py-20`}
     >
-      <div className="max-w-[1200px] mx-auto flex flex-col items-center md:max-w-[700px]  xl:max-w-[1200px]">
+      <div className="md:max-w-[700px] xl:max-w-[1200px] mx-auto flex flex-col">
         <FadeIn>
-          <header className="text-center mb-12">
-            <h2 className="text-4xl font-bold inline border-b-4 border-blue-600 mb-4">
-              Work
+          <header className="mb-10">
+            <h2 className="text-2xl md:text-3xl font-bold inline border-b-2 border-blue-600 pb-1 text-white">
+              {t.heading}
             </h2>
-            <p className="text-lg mt-4">Explore my recent projects</p>
+            <p className="pt-4 text-sm md:text-base xl:text-lg text-gray-300 max-w-2xl">
+              {t.subtitle}
+            </p>
           </header>
         </FadeIn>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 w-full items-start">
-          <div className="flex flex-col gap-10">
-            <FadeIn>
-              <h3 className="text-2xl font-semibold text-blue-400 mb-6">
-                🖥️ Web Development Projects
-              </h3>
-            </FadeIn>
-            {webProjects.map((project, index) => (
-              <ProjectCard project={project} key={index} delay={index * 0.2} />
-            ))}
-          </div>
+        <div className="grid grid-cols-1 xl:grid-cols-3 gap-6 w-full">
+          {t.featuredProjects.map((project, index) => (
+            <FeaturedProjectCard
+              project={project}
+              key={index}
+              delay={index * 0.15}
+            />
+          ))}
+        </div>
 
-          <div className="flex flex-col gap-10">
-            <FadeIn>
-              <h3 className="text-2xl font-semibold text-blue-400 mb-6">
-                📊 Data Analysis Projects
-              </h3>
-            </FadeIn>
-            {dataProjects.map((project, index) => (
-              <ProjectCard project={project} key={index} delay={index * 0.2} />
+        <div className="mt-14">
+          <FadeIn>
+            <h3 className="text-lg md:text-xl font-bold text-white mb-6">
+              {t.otherHeading}
+            </h3>
+          </FadeIn>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-4">
+            {t.otherProjects.map((proj, idx) => (
+              <FadeIn key={idx} delay={idx * 0.1}>
+                <div className="h-full rounded-xl bg-[#112240]/60 border border-slate-800 hover:border-blue-500/40 p-5 flex flex-col justify-between transition-colors">
+                  <div>
+                    <div className="flex items-start justify-between gap-2">
+                      <h4 className="font-bold text-base text-white">
+                        {proj.name}
+                      </h4>
+                      <div className="flex items-center gap-2.5 shrink-0 text-gray-400">
+                        {proj.link && proj.link !== "#" && (
+                          <a
+                            href={proj.link}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="hover:text-blue-400 transition"
+                            aria-label="Live link"
+                          >
+                            <FaExternalLinkAlt size={13} />
+                          </a>
+                        )}
+                        {proj.github && (
+                          <a
+                            href={proj.github}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="hover:text-blue-400 transition"
+                            aria-label="GitHub"
+                          >
+                            <FaGithub size={15} />
+                          </a>
+                        )}
+                      </div>
+                    </div>
+
+                    <p className="text-xs text-gray-300 mt-2 leading-relaxed">
+                      {proj.shortDescription}
+                    </p>
+                  </div>
+
+                  <div className="flex flex-wrap gap-1.5 mt-4 pt-3 border-t border-slate-800/70">
+                    {proj.technologies.map((tech, tIdx) => (
+                      <span
+                        key={tIdx}
+                        className="px-2 py-0.5 rounded bg-[#0a192f] text-[10px] font-medium text-blue-300"
+                      >
+                        {tech}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              </FadeIn>
             ))}
           </div>
         </div>

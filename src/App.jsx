@@ -1,4 +1,4 @@
-
+import { useState } from "react";
 import Navbar from "./components/Navbar";
 import Home from "./components/Home";
 import About from "./components/About";
@@ -8,20 +8,18 @@ import Contact from "./components/Contact";
 import SocialSidebar from "./components/SocialSidebar";
 import "./index.css";
 
-
-
-
 function App() {
-  return (
+  const [lang, setLang] = useState("en");
 
+  return (
     <>
-      <Navbar />
-      <SocialSidebar />
-      <Home />
-      <About />
-      <Skills />
-      <Work/> 
-      <Contact/> 
+      <Navbar lang={lang} setLang={setLang} />
+      <SocialSidebar lang={lang} />
+      <Home lang={lang} />
+      <About lang={lang} />
+      <Skills lang={lang} />
+      <Work lang={lang} />
+      <Contact lang={lang} />
     </>
   );
 }

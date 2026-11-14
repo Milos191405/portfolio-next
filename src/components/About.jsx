@@ -1,47 +1,90 @@
+import { FaChartBar, FaCode, FaRocket, FaTrophy } from "react-icons/fa";
 import FadeIn from "./FadeIn.jsx";
+import { translations } from "../data/translations";
 
-const About = ({ isNavOpen }) => {
+const About = ({ isNavOpen, lang = "en" }) => {
+  const t = (translations[lang] || translations.en).about;
+
+  const renderJourneyIcon = (type) => {
+    switch (type) {
+      case "trophy":
+        return <FaTrophy className="text-amber-400 text-base" />;
+      case "code":
+        return <FaCode className="text-indigo-400 text-base" />;
+      case "chart":
+        return <FaChartBar className="text-blue-400 text-base" />;
+      case "rocket":
+        return <FaRocket className="text-emerald-400 text-base" />;
+      default:
+        return <FaChartBar className="text-blue-400 text-base" />;
+    }
+  };
+
   return (
     <section
       id="about"
       className={`w-full ${
         isNavOpen ? "min-h-[calc(100vh-80px)]" : "min-h-screen"
-      } bg-[#0a192f] text-gray-300 flex items-center justify-center`}
+      } bg-[#0a192f] text-gray-200 flex items-center justify-center py-20`}
       aria-labelledby="about-heading"
     >
-      <div className="flex flex-col justify-center items-center w-full h-screen md:max-w-[700px] xl:max-w-[1200px] md:mx-auto px-6">
-
-        {/* Section Heading */}
-        <header className="w-full mb-4 lg:mb-6">
-          <FadeIn>
-            <h2
-              id="about-heading"
-              className="text-left text-xl md:text-2xl xl:text-3xl font-bold inline border-b-2 border-blue-600"
-            >
-              About Me
-            </h2>
-          </FadeIn>
-        </header>
-
-        {/* About Content */}
-        <div className="max-w-[1000px] xl:max-w-[1200px] w-full grid grid-cols-1 gap-8">
-          {[
-            "After a professional sports career spanning over 20 years in tennis — as a player, coach, and club manager — around three years ago I had the opportunity to fully dedicate myself to something I had long wanted to pursue: web development and data analytics.",
-
-            "Through vocational training programs supported by the German Federal Employment Agency, I built a strong foundation in modern frontend development and structured data analysis.",
-
-            "My primary focus is frontend development with React, where I build clean, responsive, and user-centered interfaces. I care deeply about usability and creating intuitive digital experiences.",
-
-            "Alongside frontend development, I specialize in SQL and Power BI — querying, cleaning, and analyzing data, and transforming it into clear dashboards and actionable insights.",
-
-            "I’m particularly interested in the intersection of data and design: using analytics to improve user experience, and using thoughtful UI to make complex data understandable."
-          ].map((text, index) => (
-            <FadeIn key={index} delay={index * 0.2}>
-              <p className="text-left text-sm md:text-base xl:text-xl mb-1 text-text-primary">
-                {text}
-              </p>
+      <div className="w-full md:max-w-[700px] xl:max-w-[1200px] mx-auto px-6">
+        <div className="w-full grid grid-cols-1 xl:grid-cols-12 gap-10 xl:gap-12 items-start">
+          {/* LEVA KOLONA */}
+          <div className="xl:col-span-6 space-y-5">
+            <FadeIn>
+              <div className="mb-6">
+                <h2
+                  id="about-heading"
+                  className="text-2xl md:text-3xl font-bold inline border-b-2 border-blue-600 pb-1 text-white"
+                >
+                  {t.heading}
+                </h2>
+              </div>
             </FadeIn>
-          ))}
+
+            {t.paragraphs.map((text, index) => (
+              <FadeIn key={index} delay={index * 0.12}>
+                <p className="text-left text-sm md:text-base xl:text-[17px] leading-relaxed text-gray-300">
+                  {text}
+                </p>
+              </FadeIn>
+            ))}
+          </div>
+
+          {/* DESNA KOLONA */}
+          <div className="xl:col-span-6">
+            <FadeIn delay={0.1}>
+              <div className="mb-6">
+                <h3 className="text-2xl md:text-3xl font-bold inline border-b-2 border-blue-600 pb-1 text-white">
+                  {t.journeyTitle}
+                </h3>
+              </div>
+            </FadeIn>
+
+            <div className="space-y-4">
+              {t.journey.map((step, idx) => (
+                <FadeIn key={idx} delay={0.2 + idx * 0.12}>
+                  <div className="flex items-start gap-4 p-4 rounded-xl bg-[#112240]/80 border border-slate-700/70 hover:border-blue-500/50 transition-colors shadow-md">
+                    <div className="w-10 h-10 rounded-lg bg-[#0a192f] border border-slate-700 flex items-center justify-center shrink-0 mt-0.5">
+                      {renderJourneyIcon(step.icon)}
+                    </div>
+                    <div>
+                      <h4 className="font-bold text-sm md:text-base text-white">
+                        {step.role}
+                      </h4>
+                      <p className="text-xs font-semibold text-blue-400 mt-0.5">
+                        {step.period}
+                      </p>
+                      <p className="text-xs md:text-sm text-gray-300 mt-1.5 leading-relaxed">
+                        {step.desc}
+                      </p>
+                    </div>
+                  </div>
+                </FadeIn>
+              ))}
+            </div>
+          </div>
         </div>
       </div>
     </section>
