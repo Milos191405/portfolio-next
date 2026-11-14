@@ -89,16 +89,10 @@ export const translations = {
       journeyTitle: "My Journey",
       journey: [
         {
-          role: "Professional Athlete, Coach & Program Director",
-          period: "2002 – 2022 • Serbia, China & Germany",
-          desc: "20+ years in high-performance tennis — coached 10+ national youth champions, led teams, and managed sports academies.",
-          icon: "trophy",
-        },
-        {
-          role: "Frontend Developer (Remote)",
-          period: "2022 – 2024 • Kontera SOFT",
-          desc: "Built responsive React & Next.js web applications, integrated PostgreSQL/MongoDB databases, and improved performance (+25% Lighthouse).",
-          icon: "code",
+          role: "Next Step: Data Engineering (DP-700)",
+          period: "In Progress",
+          desc: "Expanding enterprise data engineering capabilities within Microsoft Fabric, Spark, and automated data pipelines.",
+          icon: "rocket",
         },
         {
           role: "Data Analyst & BI Developer",
@@ -107,10 +101,16 @@ export const translations = {
           icon: "chart",
         },
         {
-          role: "Next Step: Data Engineering (DP-700)",
-          period: "In Progress",
-          desc: "Expanding enterprise data engineering capabilities within Microsoft Fabric, Spark, and automated data pipelines.",
-          icon: "rocket",
+          role: "Frontend Developer (Remote)",
+          period: "2022 – 2024 • Kontera SOFT",
+          desc: "Built responsive React & Next.js web applications, integrated PostgreSQL/MongoDB databases, and improved performance (+25% Lighthouse).",
+          icon: "code",
+        },
+        {
+          role: "Professional Athlete, Coach & Program Director",
+          period: "2002 – 2022 • Serbia, China & Germany",
+          desc: "20+ years in high-performance tennis — coached 10+ national youth champions, led teams, and managed sports academies.",
+          icon: "trophy",
         },
       ],
     },
@@ -369,16 +369,10 @@ export const translations = {
       journeyTitle: "Mein Werdegang",
       journey: [
         {
-          role: "Leistungssportler, Cheftrainer & Programmdirektor",
-          period: "2002 – 2022 • Serbien, China & Deutschland",
-          desc: "Über 20 Jahre im Leistungstennis — über 10 nationale Jugendmeister trainiert, Teams geleitet und Tennisschulen aufgebaut.",
-          icon: "trophy",
-        },
-        {
-          role: "Frontend-Entwickler (Remote)",
-          period: "2022 – 2024 • Kontera SOFT",
-          desc: "Entwicklung responsiver React- & Next.js-Webanwendungen, Anbindung an PostgreSQL/MongoDB und Performance-Optimierung (+25 % Lighthouse).",
-          icon: "code",
+          role: "Nächster Schritt: Data Engineering (DP-700)",
+          period: "In Vorbereitung",
+          desc: "Vertiefung im Bereich Enterprise Data Engineering mit Microsoft Fabric, Spark und automatisierten Datenpipelines.",
+          icon: "rocket",
         },
         {
           role: "Data Analyst & BI Developer",
@@ -387,10 +381,16 @@ export const translations = {
           icon: "chart",
         },
         {
-          role: "Nächster Schritt: Data Engineering (DP-700)",
-          period: "In Vorbereitung",
-          desc: "Vertiefung im Bereich Enterprise Data Engineering mit Microsoft Fabric, Spark und automatisierten Datenpipelines.",
-          icon: "rocket",
+          role: "Frontend-Entwickler (Remote)",
+          period: "2022 – 2024 • Kontera SOFT",
+          desc: "Entwicklung responsiver React- & Next.js-Webanwendungen, Anbindung an PostgreSQL/MongoDB und Performance-Optimierung (+25 % Lighthouse).",
+          icon: "code",
+        },
+        {
+          role: "Leistungssportler, Cheftrainer & Programmdirektor",
+          period: "2002 – 2022 • Serbien, China & Deutschland",
+          desc: "Über 20 Jahre im Leistungstennis — über 10 nationale Jugendmeister trainiert, Teams geleitet und Tennisschulen aufgebaut.",
+          icon: "trophy",
         },
       ],
     },
