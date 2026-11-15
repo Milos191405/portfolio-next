@@ -1,6 +1,7 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Link as ScrollLink } from "react-scroll";
-import { FaArrowUp, FaDownload, FaGlobe } from "react-icons/fa";
+import { FaArrowUp, FaDownload, FaGlobe, FaChevronDown } from "react-icons/fa";
+import { FiLinkedin, FiGithub, FiMail } from "react-icons/fi";
 import Logo from "../assets/MLogo2.png";
 import { translations } from "../data/translations";
 
@@ -8,11 +9,18 @@ function Navbar({ lang = "en", setLang }) {
   const [nav, setNav] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [showScrollToTop, setShowScrollToTop] = useState(false);
+  const [cvMenuOpen, setCvMenuOpen] = useState(false);
+  const cvMenuRef = useRef(null);
 
   const t = (translations[lang] || translations.en).nav;
+  const enCvFile = translations.en?.nav?.cvFile || t.cvFile;
+  const deCvFile = translations.de?.nav?.cvFile || t.cvFile;
 
   const handleClick = () => setNav(!nav);
-  const closeMenu = () => setNav(false);
+  const closeMenu = () => {
+    setNav(false);
+    setCvMenuOpen(false);
+  };
 
   const toggleLanguage = () => {
     if (setLang) {
@@ -29,6 +37,28 @@ function Navbar({ lang = "en", setLang }) {
 
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  useEffect(() => {
+    const handleOutsideClick = (e) => {
+      if (cvMenuRef.current && !cvMenuRef.current.contains(e.target)) {
+        setCvMenuOpen(false);
+      }
+    };
+
+    const handleKeyDown = (e) => {
+      if (e.key === "Escape") {
+        setCvMenuOpen(false);
+        setNav(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleOutsideClick);
+    document.addEventListener("keydown", handleKeyDown);
+    return () => {
+      document.removeEventListener("mousedown", handleOutsideClick);
+      document.removeEventListener("keydown", handleKeyDown);
+    };
   }, []);
 
   useEffect(() => {
@@ -89,7 +119,7 @@ function Navbar({ lang = "en", setLang }) {
           ))}
         </ul>
 
-        {/* RIGHT: Language Switch & CV Download */}
+        {/* RIGHT: Language Switch & CV Download Selector */}
         <div className="hidden lg:flex items-center gap-3">
           <button
             onClick={toggleLanguage}
@@ -100,14 +130,49 @@ function Navbar({ lang = "en", setLang }) {
             <span>{lang === "en" ? "DE" : "EN"}</span>
           </button>
 
-          <a
-            href={t.cvFile}
-            download
-            className="group inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-[#112240]/80 hover:bg-blue-600 border border-slate-700/80 hover:border-blue-500 text-white text-sm font-medium transition-all"
-          >
-            <FaDownload className="text-xs text-blue-400 group-hover:text-white transition-colors" />
-            <span>{t.cvLabel}</span>
-          </a>
+          <div className="relative" ref={cvMenuRef}>
+            <button
+              type="button"
+              onClick={() => setCvMenuOpen((prev) => !prev)}
+              aria-expanded={cvMenuOpen}
+              className="group inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-[#112240]/80 hover:bg-blue-600 border border-slate-700/80 hover:border-blue-500 text-white text-sm font-medium transition-all cursor-pointer"
+            >
+              <FaDownload className="text-xs text-blue-400 group-hover:text-white transition-colors" />
+              <span>{t.cvLabel}</span>
+              <FaChevronDown
+                className={`text-[10px] text-slate-300 group-hover:text-white transition-transform duration-200 ${
+                  cvMenuOpen ? "rotate-180" : ""
+                }`}
+              />
+            </button>
+
+            {cvMenuOpen && (
+              <div className="absolute right-0 mt-2 w-48 rounded-xl bg-[#112240] border border-slate-700 shadow-2xl p-1.5 z-50">
+                <a
+                  href={enCvFile}
+                  download
+                  onClick={() => setCvMenuOpen(false)}
+                  className="flex items-center justify-between px-3 py-2 rounded-lg text-xs font-medium text-gray-200 hover:bg-blue-600/20 hover:text-blue-400 transition-colors"
+                >
+                  <span>English CV</span>
+                  <span className="text-[10px] font-bold px-1.5 py-0.5 rounded bg-slate-800 text-blue-400">
+                    EN
+                  </span>
+                </a>
+                <a
+                  href={deCvFile}
+                  download
+                  onClick={() => setCvMenuOpen(false)}
+                  className="flex items-center justify-between px-3 py-2 rounded-lg text-xs font-medium text-gray-200 hover:bg-blue-600/20 hover:text-blue-400 transition-colors"
+                >
+                  <span>Lebenslauf</span>
+                  <span className="text-[10px] font-bold px-1.5 py-0.5 rounded bg-slate-800 text-blue-400">
+                    DE
+                  </span>
+                </a>
+              </div>
+            )}
+          </div>
         </div>
 
         {/* MOBILE CONTROLS */}
@@ -167,18 +232,59 @@ function Navbar({ lang = "en", setLang }) {
                 </ScrollLink>
               </li>
             ))}
-            <li className="pt-4">
+            <li className="pt-4 flex flex-row items-center gap-3">
               <a
-                href={t.cvFile}
+                href={enCvFile}
                 download
                 onClick={closeMenu}
-                className="inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-blue-600 hover:bg-blue-500 text-white text-base font-medium"
+                className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg bg-blue-600 hover:bg-blue-500 text-white text-sm font-medium shadow-lg shadow-blue-600/25"
               >
-                <FaDownload className="text-sm" />
-                <span>{t.cvLabel}</span>
+                <FaDownload className="text-xs" />
+                <span>CV (EN)</span>
+              </a>
+              <a
+                href={deCvFile}
+                download
+                onClick={closeMenu}
+                className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg bg-[#112240] hover:bg-slate-800 border border-slate-700 text-white text-sm font-medium"
+              >
+                <FaDownload className="text-xs text-blue-400" />
+                <span>CV (DE)</span>
               </a>
             </li>
           </ul>
+
+          {/* Social Icons inside Mobile Menu */}
+          <div className="flex items-center gap-7 mt-10 pt-8 border-t border-slate-800/80">
+            <a
+              href="https://www.linkedin.com/in/milos-mirkovic-7976726b/"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="LinkedIn"
+              onClick={closeMenu}
+              className="text-slate-400 hover:text-blue-400 transition-colors"
+            >
+              <FiLinkedin size={24} strokeWidth={1.75} />
+            </a>
+            <a
+              href="https://github.com/Milos191405"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="GitHub"
+              onClick={closeMenu}
+              className="text-slate-400 hover:text-blue-400 transition-colors"
+            >
+              <FiGithub size={24} strokeWidth={1.75} />
+            </a>
+            <a
+              href="mailto:milos.mirkovic7@gmail.com"
+              aria-label="Email"
+              onClick={closeMenu}
+              className="text-slate-400 hover:text-blue-400 transition-colors"
+            >
+              <FiMail size={24} strokeWidth={1.75} />
+            </a>
+          </div>
         </div>
       </nav>
 

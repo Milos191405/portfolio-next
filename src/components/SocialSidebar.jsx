@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import { FiLinkedin, FiGithub, FiMail, FiAward } from "react-icons/fi";
 import CertificateModal from "./CertificateModal.jsx";
 import { translations } from "../data/translations";
@@ -29,7 +29,52 @@ const certificates = [
 function SocialSidebar({ lang = "en" }) {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [activeCert, setActiveCert] = useState(null);
+  const leaveTimerRef = useRef(null);
+  const dropdownWrapperRef = useRef(null);
   const navT = (translations[lang] || translations.en).nav;
+
+  const openDropdown = () => {
+    if (leaveTimerRef.current) {
+      clearTimeout(leaveTimerRef.current);
+    }
+    setIsDropdownOpen(true);
+  };
+
+  const scheduleCloseDropdown = () => {
+    if (leaveTimerRef.current) {
+      clearTimeout(leaveTimerRef.current);
+    }
+    leaveTimerRef.current = setTimeout(() => {
+      setIsDropdownOpen(false);
+    }, 180);
+  };
+
+  useEffect(() => {
+    const handleOutsideClick = (e) => {
+      if (
+        dropdownWrapperRef.current &&
+        !dropdownWrapperRef.current.contains(e.target)
+      ) {
+        setIsDropdownOpen(false);
+      }
+    };
+
+    const handleKeyDown = (e) => {
+      if (e.key === "Escape") {
+        setIsDropdownOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleOutsideClick);
+    document.addEventListener("keydown", handleKeyDown);
+    return () => {
+      document.removeEventListener("mousedown", handleOutsideClick);
+      document.removeEventListener("keydown", handleKeyDown);
+      if (leaveTimerRef.current) {
+        clearTimeout(leaveTimerRef.current);
+      }
+    };
+  }, []);
 
   const links = [
     {
@@ -70,12 +115,15 @@ function SocialSidebar({ lang = "en" }) {
 
           {/* Certificates Trigger */}
           <li
+            ref={dropdownWrapperRef}
             className="relative"
-            onMouseEnter={() => setIsDropdownOpen(true)}
-            onMouseLeave={() => setIsDropdownOpen(false)}
-            onClick={() => setIsDropdownOpen((prev) => !prev)}
+            onMouseEnter={openDropdown}
+            onMouseLeave={scheduleCloseDropdown}
           >
             <button
+              type="button"
+              onClick={() => setIsDropdownOpen((prev) => !prev)}
+              aria-expanded={isDropdownOpen}
               className="text-slate-400 hover:text-blue-400 transition-all duration-300 transform hover:-translate-y-1 block p-1 cursor-pointer"
               aria-label={navT.certLabel}
               title={navT.certLabel}
@@ -84,9 +132,14 @@ function SocialSidebar({ lang = "en" }) {
             </button>
 
             {isDropdownOpen && (
-              <div className="absolute bottom-0 left-8 flex flex-col gap-1.5 bg-[#112240] border border-slate-700 text-white p-2.5 rounded-xl shadow-2xl z-50 w-56 text-xs">
+              <div
+                onMouseEnter={openDropdown}
+                onMouseLeave={scheduleCloseDropdown}
+                className="absolute bottom-0 left-9 flex flex-col gap-1.5 bg-[#112240] border border-slate-700 text-white p-2.5 rounded-xl shadow-2xl z-50 w-60 text-xs"
+              >
                 {certificates.map((item) => (
                   <button
+                    type="button"
                     key={item.href}
                     onClick={() => {
                       setActiveCert(item);
