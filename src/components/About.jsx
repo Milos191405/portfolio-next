@@ -25,7 +25,7 @@ const About = ({ isNavOpen, lang = "en" }) => {
       id="about"
       className={`w-full ${
         isNavOpen ? "min-h-[calc(100vh-80px)]" : "min-h-screen"
-      } bg-[#0a192f] text-gray-200 flex items-center justify-center py-20 border-t border-slate-800/60`}
+      } bg-[#0a192f] text-gray-200 flex items-center justify-center py-20 `}
       aria-labelledby="about-heading"
     >
       <div className="w-full md:max-w-[700px] xl:max-w-[1200px] mx-auto px-6">

@@ -6,9 +6,7 @@ import { translations } from "../data/translations";
 
 function Navbar({ lang = "en", setLang }) {
   const [nav, setNav] = useState(false);
-  const [prevScrollPos, setPrevScrollPos] = useState(window.pageYOffset);
-  const [visible, setVisible] = useState(true);
-  const [navHeight, setNavHeight] = useState(80);
+  const [isScrolled, setIsScrolled] = useState(false);
   const [showScrollToTop, setShowScrollToTop] = useState(false);
 
   const t = (translations[lang] || translations.en).nav;
@@ -24,27 +22,13 @@ function Navbar({ lang = "en", setLang }) {
 
   useEffect(() => {
     const handleScroll = () => {
-      const currentScrollPos = window.pageYOffset;
-      setVisible(prevScrollPos > currentScrollPos || currentScrollPos < 10);
+      const currentScrollPos = window.scrollY;
+      setIsScrolled(currentScrollPos > 20);
       setShowScrollToTop(currentScrollPos > 300);
-      setPrevScrollPos(currentScrollPos);
     };
 
-    window.addEventListener("scroll", handleScroll);
+    window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
-  }, [prevScrollPos]);
-
-  useEffect(() => {
-    const navbar = document.querySelector("nav");
-    if (navbar) setNavHeight(navbar.offsetHeight);
-
-    const handleResize = () => {
-      const navbar = document.querySelector("nav");
-      if (navbar) setNavHeight(navbar.offsetHeight);
-    };
-
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
   }, []);
 
   useEffect(() => {
@@ -58,25 +42,20 @@ function Navbar({ lang = "en", setLang }) {
   return (
     <>
       <nav
-        className={`fixed w-full z-50 top-0 px-6 md:px-12 flex items-center justify-between transition-all ease-in-out duration-500 border-b border-slate-800/40
-        ${visible ? "translate-y-0" : "-translate-y-full"}
-        ${
-          prevScrollPos > 20 ?
-            "h-[72px] bg-[#0a192f]/90 backdrop-blur-md shadow-lg"
-          : "h-[80px] bg-[#0a192f]"
-        }
-      `}
+        className={`fixed top-0 left-0 w-full z-50 px-6 md:px-12 flex items-center justify-between transition-all duration-300 border-b ${
+          isScrolled ?
+            "h-[72px] bg-[#0a192f]/90 backdrop-blur-md border-blue-500/30 shadow-xl shadow-black/40"
+          : "h-[80px] bg-[#0a192f] border-slate-800/80"
+        }`}
       >
-        {/* LEVO: Logo + Ime */}
+        {/* LEFT: Logo + Name */}
         <ScrollLink
           to="home"
           smooth={true}
           duration={800}
-          offset={-navHeight}
+          offset={-80}
           className="flex items-center gap-3 cursor-pointer z-50"
         >
-          {/* Option 2: Modern SaaS Gradient "MM" Badge */}
-          {/* Option 3: Framed Original Logo */}
           <div className="flex items-center gap-3">
             <div className="w-10 h-10 rounded-xl bg-[#112240]/90 border border-slate-700/80 p-1.5 flex items-center justify-center shadow-md">
               <img
@@ -91,17 +70,18 @@ function Navbar({ lang = "en", setLang }) {
           </div>
         </ScrollLink>
 
-        {/* CENTER */}
+        {/* CENTER: Navigation Links */}
         <ul className="hidden lg:flex items-center gap-8 text-sm xl:text-[15px] font-medium text-gray-300">
           {t.links.map(({ to, label }) => (
             <li key={to} className="cursor-pointer">
               <ScrollLink
-                activeClass="text-white font-semibold"
+                activeClass="!text-blue-400 font-semibold border-b-2 border-blue-500"
                 to={to}
                 smooth={true}
                 duration={800}
+                offset={-75}
                 spy={true}
-                className="hover:text-blue-400 transition-colors duration-300"
+                className="pb-1.5 hover:text-blue-400 transition-colors duration-300"
               >
                 {label}
               </ScrollLink>
@@ -109,7 +89,7 @@ function Navbar({ lang = "en", setLang }) {
           ))}
         </ul>
 
-        {/* Right: language and CV download */}
+        {/* RIGHT: Language Switch & CV Download */}
         <div className="hidden lg:flex items-center gap-3">
           <button
             onClick={toggleLanguage}
@@ -123,14 +103,14 @@ function Navbar({ lang = "en", setLang }) {
           <a
             href={t.cvFile}
             download
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-[#112240]/80 hover:bg-blue-600 border border-slate-700/80 hover:border-blue-500 text-white text-sm font-medium transition-all"
+            className="group inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-[#112240]/80 hover:bg-blue-600 border border-slate-700/80 hover:border-blue-500 text-white text-sm font-medium transition-all"
           >
-            <FaDownload className="text-xs text-blue-400 group-hover:text-white" />
+            <FaDownload className="text-xs text-blue-400 group-hover:text-white transition-colors" />
             <span>{t.cvLabel}</span>
           </a>
         </div>
 
-        {/* mobile menu */}
+        {/* MOBILE CONTROLS */}
         <div className="flex items-center gap-3 lg:hidden z-50">
           <button
             onClick={toggleLanguage}
@@ -162,23 +142,23 @@ function Navbar({ lang = "en", setLang }) {
           </div>
         </div>
 
-        {/* mobile overlay */}
+        {/* MOBILE OVERLAY */}
         <div
-          className={`fixed top-0 left-0 w-full h-screen bg-[#0a192ff5] backdrop-blur-md transition-all duration-500 flex flex-col items-center justify-center z-40 text-white 
-          ${
+          className={`fixed top-0 left-0 w-full h-screen bg-[#0a192ff5] backdrop-blur-md transition-all duration-500 flex flex-col items-center justify-center z-40 text-white ${
             nav ?
               "translate-y-0 opacity-100"
             : "-translate-y-full opacity-0 pointer-events-none"
-          }
-        `}
+          }`}
         >
           <ul className="flex flex-col gap-7 text-2xl font-semibold items-center">
             {t.links.map(({ to, label }) => (
               <li key={to}>
                 <ScrollLink
+                  activeClass="!text-blue-400 border-b-2 border-blue-500 pb-1"
                   to={to}
                   smooth={true}
                   duration={800}
+                  offset={-75}
                   spy={true}
                   onClick={closeMenu}
                   className="hover:text-blue-400 transition duration-300 cursor-pointer"

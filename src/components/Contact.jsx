@@ -56,9 +56,9 @@ function Contact({ lang = "en" }) {
   return (
     <section
       id="contact"
-      className="w-full bg-[#0a192f] text-gray-300 px-6 pt-20 pb-12 border-t border-slate-800/60"
+      className="w-full min-h-[calc(100vh-72px)] bg-[#0a192f] text-gray-300 px-6 pt-20 pb-8 flex flex-col justify-between"
     >
-      <div className="max-w-[1200px] md:max-w-[700px] xl:max-w-[1200px] mx-auto flex flex-col items-center text-center">
+      <div className="max-w-[1200px] md:max-w-[700px] xl:max-w-[1200px] mx-auto my-auto flex flex-col items-center text-center w-full">
         <FadeIn>
           <h2 className="text-3xl md:text-4xl font-bold inline border-b-2 border-blue-500 pb-1 text-white">
             {t.heading}
@@ -151,9 +151,11 @@ function Contact({ lang = "en" }) {
             )}
           </div>
         </div>
-
-        <p className="text-gray-500 text-xs md:text-sm mt-10">{t.footer}</p>
       </div>
+
+      <p className="text-gray-500 text-xs md:text-sm text-center pt-8">
+        {t.footer}
+      </p>
 
       {/* FULL-SCREEN CERTIFICATE MODAL */}
       <CertificateModal

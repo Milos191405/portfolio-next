@@ -33,7 +33,7 @@ const Work = ({ isNavOpen, lang = "en" }) => {
       id="work"
       className={`w-full ${
         isNavOpen ? "min-h-[calc(100vh-80px)]" : "min-h-screen"
-      } bg-[#0a192f] text-gray-300 px-4 sm:px-6 py-20 border-t border-slate-800/60`}
+      } bg-[#0a192f] text-gray-300 px-4 sm:px-6 py-20`}
     >
       <div className="md:max-w-[700px] xl:max-w-[1200px] mx-auto flex flex-col">
         <FadeIn>

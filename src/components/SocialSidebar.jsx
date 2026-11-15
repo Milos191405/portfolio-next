@@ -31,59 +31,60 @@ function SocialSidebar({ lang = "en" }) {
   const [activeCert, setActiveCert] = useState(null);
   const navT = (translations[lang] || translations.en).nav;
 
-  const socialLinks = [
+  const links = [
     {
       href: "https://www.linkedin.com/in/milos-mirkovic-7976726b/",
       label: "LinkedIn",
-      icon: <FiLinkedin size={19} strokeWidth={1.75} />,
+      icon: <FiLinkedin size={20} strokeWidth={1.75} />,
     },
     {
       href: "https://github.com/Milos191405",
       label: "GitHub",
-      icon: <FiGithub size={19} strokeWidth={1.75} />,
+      icon: <FiGithub size={20} strokeWidth={1.75} />,
     },
     {
       href: "mailto:milos.mirkovic7@gmail.com",
       label: "Email",
-      icon: <FiMail size={19} strokeWidth={1.75} />,
+      icon: <FiMail size={20} strokeWidth={1.75} />,
     },
   ];
 
   return (
     <>
-      <div className="hidden lg:flex fixed flex-col top-[38%] left-6 z-[80] items-center">
-        <div className="flex flex-col gap-5">
-          {socialLinks.map(({ href, label, icon }) => (
-            <a
-              key={label}
-              href={href}
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label={label}
-              title={label}
-              className="text-slate-400 hover:text-blue-400 transition-all duration-300 transform hover:-translate-y-1"
-            >
-              {icon}
-            </a>
+      <div className="hidden lg:flex fixed top-1/2 -translate-y-1/2 left-6 md:left-[54px] z-30 flex-col items-center">
+        <ul className="flex flex-col items-center gap-5">
+          {links.map(({ href, label, icon }) => (
+            <li key={label}>
+              <a
+                href={href}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={label}
+                title={label}
+                className="text-slate-400 hover:text-blue-400 transition-all duration-300 transform hover:-translate-y-1 block p-1"
+              >
+                {icon}
+              </a>
+            </li>
           ))}
 
-          {/* Certificates Dropdown Trigger */}
-          <div
+          {/* Certificates Trigger */}
+          <li
             className="relative"
             onMouseEnter={() => setIsDropdownOpen(true)}
             onMouseLeave={() => setIsDropdownOpen(false)}
             onClick={() => setIsDropdownOpen((prev) => !prev)}
           >
             <button
-              className="text-slate-400 hover:text-blue-400 transition-all duration-300 transform hover:-translate-y-1 cursor-pointer flex items-center"
+              className="text-slate-400 hover:text-blue-400 transition-all duration-300 transform hover:-translate-y-1 block p-1 cursor-pointer"
               aria-label={navT.certLabel}
               title={navT.certLabel}
             >
-              <FiAward size={19} strokeWidth={1.75} />
+              <FiAward size={20} strokeWidth={1.75} />
             </button>
 
             {isDropdownOpen && (
-              <div className="absolute top-0 left-7 flex flex-col gap-1.5 bg-[#112240] border border-slate-700 text-white p-2.5 rounded-xl shadow-2xl z-50 pointer-events-auto w-56 text-xs md:text-sm">
+              <div className="absolute bottom-0 left-8 flex flex-col gap-1.5 bg-[#112240] border border-slate-700 text-white p-2.5 rounded-xl shadow-2xl z-50 w-56 text-xs">
                 {certificates.map((item) => (
                   <button
                     key={item.href}
@@ -98,10 +99,11 @@ function SocialSidebar({ lang = "en" }) {
                 ))}
               </div>
             )}
-          </div>
-        </div>
+          </li>
+        </ul>
 
-        <div className="w-[1px] h-28 bg-slate-700/80 mt-5" />
+        {/* Vertical line below icons */}
+        <div className="w-[1px] h-20 bg-slate-700/80 mt-5" />
       </div>
 
       {/* FULL-SCREEN CERTIFICATE MODAL */}
