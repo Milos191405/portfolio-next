@@ -188,19 +188,18 @@ export const translations = {
         },
         {
           id: "bundesliga",
-          name: "Bundesliga 2023/24 Analysis",
+          name: "Bundesliga 2023/24 Performance Analysis",
           shortDescription:
-            "SQL-based team performance analysis with Z-scores, correlations, and Power BI reporting.",
+            "End-to-end analysis of all 306 Bundesliga matches and 18 clubs combining SQL, Python (Z-scores & correlation matrices), and a 6-page Power BI report on team efficiency, home-vs-away consistency, and Bayer Leverkusen's unbeaten title run.",
           description: [
-            "Analyzed Bundesliga 2023/24 performance using PostgreSQL and Python",
-            "Correlated key metrics: shots, goals, possession, passing accuracy & physical output",
-            "Benchmarked Bayer Leverkusen's unbeaten season against league averages via Z-scores",
-            "Built interactive Power BI dashboards with DAX measures and scatter plots",
+            "Analyzed all 306 matches and 18 clubs using SQL and Python (Pandas, Seaborn)",
+            "Evaluated team efficiency via Z-scores and physical metrics correlation matrices",
+            "Built a 6-page Power BI report covering offense, defense, and home-vs-away consistency",
+            "Pinpointed the statistical drivers behind Bayer Leverkusen's unbeaten title run",
           ],
-          technologies: ["SQL", "PostgreSQL", "Python", "Power BI"],
+          technologies: ["SQL", "Python", "Power BI", "DAX"],
           link: "#",
-          github:
-            "https://github.com/Milos191405/Bundesliga-2023-2024/blob/master/README.md",
+          github: "https://github.com/Milos191405/Bundesliga-2023-2024",
         },
       ],
       otherProjects: [
@@ -452,19 +451,18 @@ export const translations = {
         },
         {
           id: "bundesliga",
-          name: "Bundesliga 2023/24 Analyse",
+          name: "Bundesliga 2023/24 Performance-Analyse",
           shortDescription:
-            "SQL-basierte Team-Leistungsanalyse mit Z-Scores, Korrelationen und Power BI.",
+            "End-to-End-Analyse aller 306 Bundesliga-Spiele und 18 Vereine mit SQL, Python (Z-Scores & Korrelationsmatrizen) sowie einem 6-seitigen Power-BI-Bericht zu Team-Effizienz, Heim-/Auswärtskonstanz und Bayer Leverkusens ungeschlagener Meistersaison.",
           description: [
-            "Analyse der Bundesliga-Saison 2023/24 mit PostgreSQL und Python",
-            "Korrelationsanalyse von Torschüssen, Toren, Ballbesitz und Laufleistung",
-            "Benchmarking von Bayer Leverkusen gegen den Ligadurchschnitt mittels Z-Scores",
-            "Interaktive Power BI Dashboards mit DAX-Kennzahlen und Streudiagrammen",
+            "Analyse aller 306 Spiele und 18 Vereine mit SQL und Python (Pandas, Seaborn)",
+            "Bewertung der Team-Effizienz mittels Z-Scores und Korrelationsmatrizen",
+            "Erstellung eines 6-seitigen Power-BI-Berichts zu Offensive, Defensive und Heim-/Auswärtskonstanz",
+            "Identifikation der statistischen Erfolgsfaktoren von Bayer Leverkusens ungeschlagener Saison",
           ],
-          technologies: ["SQL", "PostgreSQL", "Python", "Power BI"],
+          technologies: ["SQL", "Python", "Power BI", "DAX"],
           link: "#",
-          github:
-            "https://github.com/Milos191405/Bundesliga-2023-2024/blob/master/README.md",
+          github: "https://github.com/Milos191405/Bundesliga-2023-2024",
         },
       ],
       otherProjects: [
