@@ -34,18 +34,133 @@ const CERT_DATA = {
 
 function Home({ isNavOpen, lang = "en" }) {
   const [activeCert, setActiveCert] = useState(null);
+  const [activeProject, setActiveProject] = useState(0);
   const currentLang = translations[lang] || translations.en;
   const t = currentLang.home;
+  const isDe = lang === "de";
+
+  const showcases = [
+    {
+      tab: "Warehouse DC",
+      title: "Warehouse Control Tower • Heidelberg DC",
+      badge: isDe ? "VALIDIERT" : "VALIDATED",
+      badgeClass: "border-emerald-500/30 bg-emerald-500/10 text-emerald-400",
+      kpis: [
+        {
+          label: isDe ? "Datenvolumen" : "Data Volume",
+          value: isDe ? "800K+ Zeilen" : "800K+ Rows",
+          valueClass: "text-white",
+          sub: isDe ? "200K Sendungen/J." : "200K Shipments/yr",
+          subClass: "text-emerald-400",
+        },
+        {
+          label: isDe ? "Lagerplätze" : "Storage Locations",
+          value: isDe ? "24.180" : "24,180",
+          valueClass: "text-blue-400",
+          sub: isDe ? "3 Hallen • 37,5K SKUs" : "3 Halls • 37.5K SKUs",
+          subClass: "text-gray-400",
+        },
+        {
+          label: isDe ? "Termintreue" : "On-Time Delivery",
+          value: isDe ? "98,5 %" : "98.5%",
+          valueClass: "text-emerald-400",
+          sub: "Order → Shipping",
+          subClass: "text-blue-400",
+        },
+      ],
+      chartTitle: "Data Pipeline (Bronze → Silver → Gold)",
+      chartStack: "Python • SQL • Power BI",
+      bars: [45, 60, 52, 75, 68, 88, 98],
+    },
+    {
+      tab: "ATP 2024",
+      title: "ATP Tennis Season 2024 • Star Schema",
+      badge: "POWER BI",
+      badgeClass: "border-blue-500/30 bg-blue-500/10 text-blue-400",
+      kpis: [
+        {
+          label: isDe ? "Matches" : "Matches Cleaned",
+          value: isDe ? "2.695+" : "2,695+",
+          valueClass: "text-white",
+          sub: "Python QA Pipeline",
+          subClass: "text-emerald-400",
+        },
+        {
+          label: isDe ? "Datenmodell" : "Data Model",
+          value: "PostgreSQL",
+          valueClass: "text-blue-400",
+          sub: "H2H & Surface Views",
+          subClass: "text-gray-400",
+        },
+        {
+          label: "Dashboard",
+          value: isDe ? "3 Seiten" : "3 Pages",
+          valueClass: "text-emerald-400",
+          sub: "Dominance & Clutch",
+          subClass: "text-blue-400",
+        },
+      ],
+      chartTitle:
+        isDe ?
+          "Siegquote & Clutch-Index Modellierung"
+        : "Surface Win Rate & Clutch Index",
+      chartStack: "Python • PostgreSQL • DAX",
+      bars: [52, 68, 58, 80, 74, 90, 96],
+    },
+    {
+      tab: "Bundesliga",
+      title: "Bundesliga 2023/24 • Team Benchmark",
+      badge: "Z-SCORE",
+      badgeClass: "border-emerald-500/30 bg-emerald-500/10 text-emerald-400",
+      kpis: [
+        {
+          label: isDe ? "Saisonspiele" : "Season Matches",
+          value: "306",
+          valueClass: "text-white",
+          sub: isDe ? "18 Vereine" : "18 Clubs Analyzed",
+          subClass: "text-emerald-400",
+        },
+        {
+          label: isDe ? "Statistik" : "Statistics",
+          value: "Z-Scores",
+          valueClass: "text-blue-400",
+          sub: "Shots, Goals & xG",
+          subClass: "text-gray-400",
+        },
+        {
+          label: "Benchmark",
+          value: "+2.4 σ",
+          valueClass: "text-emerald-400",
+          sub: "Leverkusen Unbeaten",
+          subClass: "text-blue-400",
+        },
+      ],
+      chartTitle:
+        isDe ?
+          "Team-Effizienz vs. Ligadurchschnitt"
+        : "Club Efficiency vs. League Average",
+      chartStack: "SQL • Python • Power BI",
+      bars: [42, 55, 48, 64, 70, 84, 95],
+    },
+  ];
+
+  const currentShowcase = showcases[activeProject];
 
   return (
     <section
       id="home"
-      className={`w-full flex items-center justify-center bg-[#0a192f] px-4 sm:px-6 pt-28 pb-16 md:px-10 ${
+      className={`relative w-full flex items-center justify-center bg-[#0a192f] px-4 sm:px-6 pt-28 pb-16 md:px-10 overflow-hidden ${
         isNavOpen ? "min-h-[calc(100vh-80px)] pt-40" : "min-h-screen"
       }`}
       aria-labelledby="home-heading"
     >
-      <div className="w-full md:max-w-[700px] xl:max-w-[1200px] mx-auto">
+      {/* Subtle Ambient Glow */}
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute -top-28 right-0 w-[500px] h-[500px] rounded-full bg-blue-600/10 blur-3xl"
+      />
+
+      <div className="relative w-full md:max-w-[700px] xl:max-w-[1200px] mx-auto">
         <div className="grid grid-cols-1 gap-12 xl:grid-cols-12 xl:items-center">
           {/* LEFT COLUMN: Intro, Certifications, CTA Buttons & Location */}
           <div className="flex flex-col items-start justify-center xl:col-span-7 min-w-0">
@@ -136,13 +251,13 @@ function Home({ isNavOpen, lang = "en" }) {
 
                         <div className="flex items-center gap-2 shrink-0">
                           <span
-                            className={`rounded border px-2 py-0.5 text-[9px] sm:text-[10px] font-bold tracking-wider uppercase ${badgeStyle}`}
+                            className={`rounded border px-2 py-0.5 text-[9px] sm:text-[10px] font-bold tracking-wider uppercase whitespace-nowrap ${badgeStyle}`}
                           >
                             {cert.status}
                           </span>
 
-                          {/* Direct Verify Link Icon */}
-                          {certInfo?.verifyUrl && (
+                          {/* Direct Verify Link Icon or Spacer for Exact Alignment */}
+                          {certInfo?.verifyUrl ?
                             <a
                               href={certInfo.verifyUrl}
                               target="_blank"
@@ -158,7 +273,11 @@ function Home({ isNavOpen, lang = "en" }) {
                             >
                               <FaExternalLinkAlt className="text-[11px]" />
                             </a>
-                          )}
+                          : <span
+                              className="w-[23px] shrink-0"
+                              aria-hidden="true"
+                            />
+                          }
                         </div>
                       </div>
                     );
@@ -208,13 +327,12 @@ function Home({ isNavOpen, lang = "en" }) {
             </FadeIn>
           </div>
 
-          {/* RIGHT COLUMN: Analytics & Lakehouse Snapshot Card */}
-          {/* RIGHT COLUMN: Warehouse Control Tower Snapshot Card */}
+          {/* RIGHT COLUMN: Interactive Analytics Snapshot Card */}
           <div className="xl:col-span-5 min-w-0">
             <FadeIn delay={0.5}>
               <div className="rounded-2xl border border-slate-800 bg-[#112240]/70 p-5 sm:p-6 shadow-2xl backdrop-blur-sm">
                 {/* Card Header */}
-                <div className="flex items-start justify-between gap-4 mb-6">
+                <div className="flex items-start justify-between gap-4 mb-5">
                   <div>
                     <p className="text-base sm:text-lg font-bold italic text-white">
                       {t.quote}
@@ -226,7 +344,24 @@ function Home({ isNavOpen, lang = "en" }) {
                   </div>
                 </div>
 
-                {/* Inner Analytics Mockup Window */}
+                {/* Project Switcher Tabs */}
+                <div className="grid grid-cols-3 gap-1.5 rounded-lg border border-slate-800 bg-[#0a192f]/80 p-1 mb-3.5">
+                  {showcases.map((item, idx) => (
+                    <button
+                      key={item.tab}
+                      type="button"
+                      onClick={() => setActiveProject(idx)}
+                      className={`rounded-md py-1.5 px-2 text-[11px] font-semibold transition-all cursor-pointer truncate ${
+                        activeProject === idx ?
+                          "bg-blue-600 text-white shadow-sm"
+                        : "text-gray-400 hover:text-white hover:bg-slate-800/60"
+                      }`}
+                    >
+                      {item.tab}
+                    </button>
+                  ))}
+                </div>
+
                 {/* Inner Analytics Mockup Window */}
                 <div className="rounded-xl border border-slate-800 bg-[#0a192f]/95 p-3.5 sm:p-4">
                   <div className="flex items-center justify-between gap-2 border-b border-slate-800/80 pb-3 mb-4">
@@ -235,67 +370,56 @@ function Home({ isNavOpen, lang = "en" }) {
                       <span className="w-2.5 h-2.5 rounded-full bg-amber-500/80 shrink-0" />
                       <span className="w-2.5 h-2.5 rounded-full bg-emerald-500/80 shrink-0" />
                       <span className="ml-1.5 text-[10px] sm:text-[11px] font-mono text-gray-300 truncate">
-                        Warehouse Control Tower • Heidelberg DC
+                        {currentShowcase.title}
                       </span>
                     </div>
-                    <span className="shrink-0 rounded border border-emerald-500/30 bg-emerald-500/10 px-2 py-0.5 text-[9px] sm:text-[10px] font-bold text-emerald-400 uppercase">
-                      VALIDATED
+                    <span
+                      className={`shrink-0 rounded border px-2 py-0.5 text-[9px] sm:text-[10px] font-bold uppercase ${currentShowcase.badgeClass}`}
+                    >
+                      {currentShowcase.badge}
                     </span>
                   </div>
 
                   {/* 3 KPI Cards */}
                   <div className="grid grid-cols-3 gap-2 sm:gap-2.5 mb-4">
-                    <div className="rounded-lg border border-slate-800 bg-[#112240]/60 p-2.5 sm:p-3">
-                      <p className="text-[10px] sm:text-[11px] text-gray-400 truncate">
-                        Data Volume
-                      </p>
-                      <p className="mt-1 text-sm sm:text-base font-extrabold text-white">
-                        800K+ Rows
-                      </p>
-                      <p className="text-[10px] text-emerald-400 mt-0.5 truncate">
-                        200K Shipments/yr
-                      </p>
-                    </div>
-                    <div className="rounded-lg border border-slate-800 bg-[#112240]/60 p-2.5 sm:p-3">
-                      <p className="text-[10px] sm:text-[11px] text-gray-400 truncate">
-                        Storage Locations
-                      </p>
-                      <p className="mt-1 text-sm sm:text-base font-extrabold text-blue-400">
-                        24,180
-                      </p>
-                      <p className="text-[10px] text-gray-400 mt-0.5 truncate">
-                        3 Halls • 37.5K SKUs
-                      </p>
-                    </div>
-                    <div className="rounded-lg border border-slate-800 bg-[#112240]/60 p-2.5 sm:p-3">
-                      <p className="text-[10px] sm:text-[11px] text-gray-400 truncate">
-                        On-Time Delivery
-                      </p>
-                      <p className="mt-1 text-sm sm:text-base font-extrabold text-emerald-400">
-                        98.5%
-                      </p>
-                      <p className="text-[10px] text-blue-400 mt-0.5 truncate">
-                        Order → Shipping
-                      </p>
-                    </div>
+                    {currentShowcase.kpis.map((kpi) => (
+                      <div
+                        key={kpi.label}
+                        className="rounded-lg border border-slate-800 bg-[#112240]/60 p-2.5 sm:p-3 min-w-0"
+                      >
+                        <p className="text-[10px] sm:text-[11px] text-gray-400 truncate">
+                          {kpi.label}
+                        </p>
+                        <p
+                          className={`mt-1 text-xs sm:text-sm font-extrabold whitespace-nowrap ${kpi.valueClass}`}
+                        >
+                          {kpi.value}
+                        </p>
+                        <p
+                          className={`text-[10px] mt-0.5 truncate ${kpi.subClass}`}
+                        >
+                          {kpi.sub}
+                        </p>
+                      </div>
+                    ))}
                   </div>
 
                   {/* Model & Pipeline Coverage Bar Chart */}
                   <div className="rounded-lg border border-slate-800 bg-[#112240]/40 p-3.5">
                     <div className="flex items-center justify-between gap-2 text-[11px] mb-3">
-                      <span className="font-semibold text-gray-300">
-                        Data Pipeline (Bronze → Silver → Gold)
+                      <span className="font-semibold text-gray-300 truncate">
+                        {currentShowcase.chartTitle}
                       </span>
                       <span className="font-mono text-[10px] text-blue-400 shrink-0">
-                        Python • SQL • Power BI
+                        {currentShowcase.chartStack}
                       </span>
                     </div>
 
                     <div className="grid grid-cols-7 items-end gap-2 h-24 pt-2">
-                      {[45, 60, 52, 75, 68, 88, 98].map((val, i) => (
+                      {currentShowcase.bars.map((val, i) => (
                         <div
                           key={i}
-                          className={`w-full rounded-t transition-all ${
+                          className={`w-full rounded-t transition-all duration-300 ${
                             i >= 5 ?
                               "bg-gradient-to-t from-blue-600 to-blue-400"
                             : "bg-blue-500/35"

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { FaGithub, FaExternalLinkAlt } from "react-icons/fa";
+import { FaGithub, FaExternalLinkAlt, FaImages } from "react-icons/fa";
 import FadeIn from "./FadeIn";
 import ProjectModal from "./ProjectModal";
 import { translations } from "../data/translations";
@@ -9,9 +9,16 @@ import Properties from "../assets/Work/Properties.png";
 
 // Map project IDs to an array of images for the modal gallery
 const PROJECT_GALLERIES = {
-  wct: [Properties], // Replace with Warehouse Control Tower screenshots when ready
-  atp: [Bundesliga], // Replace with ATP screenshots when ready
-  bundesliga: [Bundesliga],
+  wct: [Properties], // Replace with /projects/wct/... when ready
+  atp: [Bundesliga], // Replace with /projects/atp/... when ready
+  bundesliga: [
+    "/projects/bundesliga/01-league-overview.png",
+    "/projects/bundesliga/02-offensive-performance.png",
+    "/projects/bundesliga/03-home-vs-away.png",
+    "/projects/bundesliga/04-leverkusen-case-study.png",
+    "/projects/bundesliga/05-python-zscore.png",
+    "/projects/bundesliga/06-python-correlation.png",
+  ],
   traffic: [Properties],
 };
 
@@ -50,23 +57,38 @@ const Work = ({ isNavOpen, lang = "en" }) => {
         {/* FEATURED PROJECTS GRID */}
         <div className="grid grid-cols-1 xl:grid-cols-3 gap-6 w-full">
           {t.featuredProjects.map((project, index) => {
-            const thumb = (PROJECT_GALLERIES[project.id] || [Bundesliga])[0];
+            const gallery = PROJECT_GALLERIES[project.id] || [Bundesliga];
+            const thumb = gallery[0];
+
             return (
               <FadeIn key={index} delay={index * 0.15}>
                 <div
                   onClick={() => openProjectModal(project)}
                   className="group rounded-2xl bg-[#112240]/75 border border-slate-800 hover:border-blue-500/50 shadow-xl overflow-hidden h-full flex flex-col transition-all cursor-pointer hover:-translate-y-1"
                 >
-                  <div className="overflow-hidden h-[200px] border-b border-slate-800 relative">
+                  <div className="overflow-hidden h-[200px] border-b border-slate-800 relative bg-[#0a192f]">
                     <img
                       src={thumb}
                       alt={project.name}
-                      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                      className="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-105"
                     />
+                    <div
+                      aria-hidden="true"
+                      className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#0a192f]/50 via-transparent to-transparent"
+                    />
+
                     {/* Status Badge for In-Progress Projects (e.g. Warehouse Control Tower) */}
                     {project.statusBadge && (
                       <span className="absolute top-3 right-3 px-2.5 py-1 rounded-full bg-amber-500/95 text-[#0a192f] text-[10px] font-extrabold tracking-wider uppercase shadow-lg">
                         {project.statusBadge}
+                      </span>
+                    )}
+
+                    {/* Slide Counter Pill */}
+                    {gallery.length > 1 && (
+                      <span className="absolute bottom-3 right-3 inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-[#0a192f]/90 border border-slate-700/80 text-[11px] font-semibold text-blue-300 backdrop-blur-sm">
+                        <FaImages className="text-[11px]" />
+                        <span>{gallery.length}</span>
                       </span>
                     )}
                   </div>
