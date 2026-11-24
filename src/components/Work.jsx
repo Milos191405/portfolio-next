@@ -9,8 +9,8 @@ import Properties from "../assets/Work/Properties.png";
 
 // Map project IDs to an array of images for the modal gallery
 const PROJECT_GALLERIES = {
-  wct: [Properties], // Replace with /projects/wct/... when ready
-  atp: [Bundesliga], // Replace with /projects/atp/... when ready
+  wct: [Properties],
+  atp: ["/projects/atp/01-atp.png", "/projects/atp/02-atp.png"],
   bundesliga: [
     "/projects/bundesliga/01-league-overview.png",
     "/projects/bundesliga/02-offensive-performance.png",

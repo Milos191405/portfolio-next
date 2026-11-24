@@ -234,7 +234,7 @@ export const translations = {
           shortDescription:
             "Responsive psychologist website built with Next.js and optimized for SEO.",
           technologies: ["Next.js", "Tailwind CSS", "JavaScript"],
-          link: "https://psiholog-smilja-igic.vercel.app/",
+          link: "https://www.smiljaigicpsiholog.net/",
           github: "https://github.com/Milos191405/psiholog_smilja_igic",
         },
       ],
@@ -497,7 +497,7 @@ export const translations = {
           shortDescription:
             "Responsive Website für eine Psychologin mit Next.js und SEO-Optimierung.",
           technologies: ["Next.js", "Tailwind CSS", "JavaScript"],
-          link: "https://psiholog-smilja-igic.vercel.app/",
+          link: "https://www.smiljaigicpsiholog.net/",
           github: "https://github.com/Milos191405/psiholog_smilja_igic",
         },
       ],

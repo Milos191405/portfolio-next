@@ -45,6 +45,7 @@ function Home({ isNavOpen, lang = "en" }) {
       title: "Warehouse Control Tower • Heidelberg DC",
       badge: isDe ? "VALIDIERT" : "VALIDATED",
       badgeClass: "border-emerald-500/30 bg-emerald-500/10 text-emerald-400",
+      bgImage: "/projects/warehouse-bg.png", // zameni tačnim imenom fajla u public/projects/
       kpis: [
         {
           label: isDe ? "Datenvolumen" : "Data Volume",
@@ -77,6 +78,7 @@ function Home({ isNavOpen, lang = "en" }) {
       title: "ATP Tennis Season 2024 • Star Schema",
       badge: "POWER BI",
       badgeClass: "border-blue-500/30 bg-blue-500/10 text-blue-400",
+      bgImage: "/projects/atp-bg.png", // zameni tačnim imenom fajla u public/projects/
       kpis: [
         {
           label: isDe ? "Matches" : "Matches Cleaned",
@@ -112,6 +114,7 @@ function Home({ isNavOpen, lang = "en" }) {
       title: "Bundesliga 2023/24 • Team Benchmark",
       badge: "Z-SCORE",
       badgeClass: "border-emerald-500/30 bg-emerald-500/10 text-emerald-400",
+      bgImage: "/projects/bundesliga/03-home-vs-away.png",
       kpis: [
         {
           label: isDe ? "Saisonspiele" : "Season Matches",
@@ -363,70 +366,89 @@ function Home({ isNavOpen, lang = "en" }) {
                 </div>
 
                 {/* Inner Analytics Mockup Window */}
-                <div className="rounded-xl border border-slate-800 bg-[#0a192f]/95 p-3.5 sm:p-4">
-                  <div className="flex items-center justify-between gap-2 border-b border-slate-800/80 pb-3 mb-4">
-                    <div className="flex items-center gap-1.5 min-w-0">
-                      <span className="w-2.5 h-2.5 rounded-full bg-rose-500/80 shrink-0" />
-                      <span className="w-2.5 h-2.5 rounded-full bg-amber-500/80 shrink-0" />
-                      <span className="w-2.5 h-2.5 rounded-full bg-emerald-500/80 shrink-0" />
-                      <span className="ml-1.5 text-[10px] sm:text-[11px] font-mono text-gray-300 truncate">
-                        {currentShowcase.title}
-                      </span>
-                    </div>
-                    <span
-                      className={`shrink-0 rounded border px-2 py-0.5 text-[9px] sm:text-[10px] font-bold uppercase ${currentShowcase.badgeClass}`}
-                    >
-                      {currentShowcase.badge}
-                    </span>
-                  </div>
+                <div className="relative overflow-hidden rounded-xl border border-slate-800 bg-[#0a192f]/95 p-3.5 sm:p-4">
+                  {/* Subtle Background Image per Active Project */}
+                  {currentShowcase.bgImage && (
+                    <div
+                      aria-hidden="true"
+                      className="pointer-events-none absolute inset-0 bg-cover bg-center opacity-15 transition-all duration-300"
+                      style={{
+                        backgroundImage: `url("${currentShowcase.bgImage}")`,
+                      }}
+                    />
+                  )}
 
-                  {/* 3 KPI Cards */}
-                  <div className="grid grid-cols-3 gap-2 sm:gap-2.5 mb-4">
-                    {currentShowcase.kpis.map((kpi) => (
-                      <div
-                        key={kpi.label}
-                        className="rounded-lg border border-slate-800 bg-[#112240]/60 p-2.5 sm:p-3 min-w-0"
-                      >
-                        <p className="text-[10px] sm:text-[11px] text-gray-400 truncate">
-                          {kpi.label}
-                        </p>
-                        <p
-                          className={`mt-1 text-xs sm:text-sm font-extrabold whitespace-nowrap ${kpi.valueClass}`}
-                        >
-                          {kpi.value}
-                        </p>
-                        <p
-                          className={`text-[10px] mt-0.5 truncate ${kpi.subClass}`}
-                        >
-                          {kpi.sub}
-                        </p>
+                  {/* Dark Overlay so KPIs and Chart Stay Easy to Read */}
+                  <div
+                    aria-hidden="true"
+                    className="pointer-events-none absolute inset-0 bg-[#0a192f]/65"
+                  />
+
+                  <div className="relative z-10">
+                    <div className="flex items-center justify-between gap-2 border-b border-slate-800/80 pb-3 mb-4">
+                      <div className="flex items-center gap-1.5 min-w-0">
+                        <span className="w-2.5 h-2.5 rounded-full bg-rose-500/80 shrink-0" />
+                        <span className="w-2.5 h-2.5 rounded-full bg-amber-500/80 shrink-0" />
+                        <span className="w-2.5 h-2.5 rounded-full bg-emerald-500/80 shrink-0" />
+                        <span className="ml-1.5 text-[10px] sm:text-[11px] font-mono text-gray-300 truncate">
+                          {currentShowcase.title}
+                        </span>
                       </div>
-                    ))}
-                  </div>
-
-                  {/* Model & Pipeline Coverage Bar Chart */}
-                  <div className="rounded-lg border border-slate-800 bg-[#112240]/40 p-3.5">
-                    <div className="flex items-center justify-between gap-2 text-[11px] mb-3">
-                      <span className="font-semibold text-gray-300 truncate">
-                        {currentShowcase.chartTitle}
-                      </span>
-                      <span className="font-mono text-[10px] text-blue-400 shrink-0">
-                        {currentShowcase.chartStack}
+                      <span
+                        className={`shrink-0 rounded border px-2 py-0.5 text-[9px] sm:text-[10px] font-bold uppercase ${currentShowcase.badgeClass}`}
+                      >
+                        {currentShowcase.badge}
                       </span>
                     </div>
 
-                    <div className="grid grid-cols-7 items-end gap-2 h-24 pt-2">
-                      {currentShowcase.bars.map((val, i) => (
+                    {/* 3 KPI Cards */}
+                    <div className="grid grid-cols-3 gap-2 sm:gap-2.5 mb-4">
+                      {currentShowcase.kpis.map((kpi) => (
                         <div
-                          key={i}
-                          className={`w-full rounded-t transition-all duration-300 ${
-                            i >= 5 ?
-                              "bg-gradient-to-t from-blue-600 to-blue-400"
-                            : "bg-blue-500/35"
-                          }`}
-                          style={{ height: `${val}%` }}
-                        />
+                          key={kpi.label}
+                          className="rounded-lg border border-slate-800 bg-[#112240]/75 p-2.5 sm:p-3 min-w-0"
+                        >
+                          <p className="text-[10px] sm:text-[11px] text-gray-400 truncate">
+                            {kpi.label}
+                          </p>
+                          <p
+                            className={`mt-1 text-xs sm:text-sm font-extrabold whitespace-nowrap ${kpi.valueClass}`}
+                          >
+                            {kpi.value}
+                          </p>
+                          <p
+                            className={`text-[10px] mt-0.5 truncate ${kpi.subClass}`}
+                          >
+                            {kpi.sub}
+                          </p>
+                        </div>
                       ))}
+                    </div>
+
+                    {/* Model & Pipeline Coverage Bar Chart */}
+                    <div className="rounded-lg border border-slate-800 bg-[#112240]/60 p-3.5">
+                      <div className="flex items-center justify-between gap-2 text-[11px] mb-3">
+                        <span className="font-semibold text-gray-300 truncate">
+                          {currentShowcase.chartTitle}
+                        </span>
+                        <span className="font-mono text-[10px] text-blue-400 shrink-0">
+                          {currentShowcase.chartStack}
+                        </span>
+                      </div>
+
+                      <div className="grid grid-cols-7 items-end gap-2 h-24 pt-2">
+                        {currentShowcase.bars.map((val, i) => (
+                          <div
+                            key={i}
+                            className={`w-full rounded-t transition-all duration-300 ${
+                              i >= 5 ?
+                                "bg-gradient-to-t from-blue-600 to-blue-400"
+                              : "bg-blue-500/35"
+                            }`}
+                            style={{ height: `${val}%` }}
+                          />
+                        ))}
+                      </div>
                     </div>
                   </div>
                 </div>
