@@ -8,6 +8,7 @@ import {
   FaChevronRight,
   FaCheckCircle,
 } from "react-icons/fa";
+import { useScrollLock } from "../hooks/useScrollLock";
 
 const ProjectModal = ({
   activeProject,
@@ -16,10 +17,13 @@ const ProjectModal = ({
   slideIndex,
   setSlideIndex,
 }) => {
-  // Handle keyboard navigation (ESC to close, Left/Right arrows for gallery)
+  useScrollLock(Boolean(activeProject));
+
+  // Keyboard navigation (ESC to close, Left/Right arrows for gallery)
   useEffect(() => {
+    if (!activeProject) return undefined;
+
     const handleKeyDown = (e) => {
-      if (!activeProject) return;
       if (e.key === "Escape") onClose();
       if (e.key === "ArrowRight" && currentImages.length > 1) {
         setSlideIndex((prev) => (prev + 1) % currentImages.length);
@@ -31,17 +35,8 @@ const ProjectModal = ({
       }
     };
 
-    if (activeProject) {
-      document.body.style.overflow = "hidden";
-      window.addEventListener("keydown", handleKeyDown);
-    } else {
-      document.body.style.overflow = "auto";
-    }
-
-    return () => {
-      document.body.style.overflow = "auto";
-      window.removeEventListener("keydown", handleKeyDown);
-    };
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
   }, [activeProject, currentImages.length, onClose, setSlideIndex]);
 
   const nextSlide = (e) => {

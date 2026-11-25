@@ -1,11 +1,26 @@
+import { useEffect } from "react";
 import {
   FaTimes,
   FaExternalLinkAlt,
   FaCheckCircle,
   FaAward,
 } from "react-icons/fa";
+import { useScrollLock } from "../hooks/useScrollLock";
 
 const CertificateModal = ({ activeCert, onClose, lang = "en" }) => {
+  const isOpen = Boolean(activeCert);
+  useScrollLock(isOpen);
+
+  // Close on ESC
+  useEffect(() => {
+    if (!isOpen) return undefined;
+    const handleKeyDown = (e) => {
+      if (e.key === "Escape") onClose();
+    };
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [isOpen, onClose]);
+
   if (!activeCert) return null;
 
   const isPdf = activeCert.href?.toLowerCase().endsWith(".pdf");

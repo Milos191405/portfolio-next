@@ -4,6 +4,7 @@ import { FaArrowUp, FaDownload, FaGlobe, FaChevronDown } from "react-icons/fa";
 import { FiLinkedin, FiGithub, FiMail } from "react-icons/fi";
 import Logo from "../assets/MLogo2.png";
 import { translations } from "../data/translations";
+import { useScrollLock } from "../hooks/useScrollLock";
 
 function Navbar({ lang = "en", setLang }) {
   const [nav, setNav] = useState(false);
@@ -61,9 +62,7 @@ function Navbar({ lang = "en", setLang }) {
     };
   }, []);
 
-  useEffect(() => {
-    document.body.style.overflow = nav ? "hidden" : "auto";
-  }, [nav]);
+  useScrollLock(nav);
 
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
@@ -185,8 +184,11 @@ function Navbar({ lang = "en", setLang }) {
             <span>{lang === "en" ? "DE" : "EN"}</span>
           </button>
 
-          <div
+          <button
+            type="button"
             onClick={handleClick}
+            aria-label={nav ? "Close menu" : "Open menu"}
+            aria-expanded={nav}
             className="w-10 h-10 flex flex-col justify-center items-center cursor-pointer"
           >
             <span
@@ -204,7 +206,7 @@ function Navbar({ lang = "en", setLang }) {
                 nav ? "-rotate-45 -translate-y-1.5" : ""
               }`}
             />
-          </div>
+          </button>
         </div>
 
         {/* MOBILE OVERLAY */}

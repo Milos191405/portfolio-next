@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Navbar from "./components/Navbar";
 import Home from "./components/Home";
 import About from "./components/About";
@@ -10,6 +10,11 @@ import "./index.css";
 
 function App() {
   const [lang, setLang] = useState("en");
+
+  // Keep <html lang> in sync for screen readers, SEO and hyphenation
+  useEffect(() => {
+    document.documentElement.lang = lang;
+  }, [lang]);
 
   return (
     <div className="bg-[#0a192f] min-h-screen w-full overflow-x-hidden text-gray-200 selection:bg-blue-500/30 selection:text-blue-200">
