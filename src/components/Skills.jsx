@@ -2,7 +2,7 @@ import { FaChartBar, FaCode, FaDatabase } from "react-icons/fa";
 import FadeIn from "./FadeIn";
 import { translations } from "../data/translations";
 
-const Skills = ({ isNavOpen, lang = "en" }) => {
+const Skills = ({ lang = "en" }) => {
   const t = (translations[lang] || translations.en).skills;
 
   const renderIcon = (iconType) => {
@@ -21,9 +21,7 @@ const Skills = ({ isNavOpen, lang = "en" }) => {
   return (
     <section
       id="skills"
-      className={`w-full ${
-        isNavOpen ? "min-h-[calc(100vh-80px)]" : "min-h-screen"
-      } bg-[#0a192f] text-gray-300 flex items-center justify-center px-6 py-20`}
+      className="w-full min-h-screen bg-[#0a192f] text-gray-300 flex items-center justify-center px-6 py-20"
     >
       <div className="md:max-w-[700px] xl:max-w-[1200px] mx-auto flex flex-col justify-center w-full">
         <FadeIn>

@@ -19,10 +19,9 @@ const PROJECT_GALLERIES = {
     "/projects/bundesliga/05-python-zscore.png",
     "/projects/bundesliga/06-python-correlation.png",
   ],
-  traffic: [Properties],
 };
 
-const Work = ({ isNavOpen, lang = "en" }) => {
+const Work = ({ lang = "en" }) => {
   const [activeProject, setActiveProject] = useState(null);
   const [slideIndex, setSlideIndex] = useState(0);
   const t = (translations[lang] || translations.en).work;
@@ -38,9 +37,7 @@ const Work = ({ isNavOpen, lang = "en" }) => {
   return (
     <section
       id="work"
-      className={`w-full ${
-        isNavOpen ? "min-h-[calc(100vh-80px)]" : "min-h-screen"
-      } bg-[#0a192f] text-gray-300 px-4 sm:px-6 py-20`}
+      className="w-full min-h-screen bg-[#0a192f] text-gray-300 px-4 sm:px-6 py-20"
     >
       <div className="md:max-w-[700px] xl:max-w-[1200px] mx-auto flex flex-col">
         <FadeIn>

@@ -32,7 +32,7 @@ const CERT_DATA = {
   },
 };
 
-function Home({ isNavOpen, lang = "en" }) {
+function Home({ lang = "en" }) {
   const [activeCert, setActiveCert] = useState(null);
   const [activeProject, setActiveProject] = useState(0);
   const currentLang = translations[lang] || translations.en;
@@ -152,9 +152,7 @@ function Home({ isNavOpen, lang = "en" }) {
   return (
     <section
       id="home"
-      className={`relative w-full flex items-center justify-center bg-[#0a192f] px-4 sm:px-6 pt-28 pb-16 md:px-10 overflow-hidden ${
-        isNavOpen ? "min-h-[calc(100vh-80px)] pt-40" : "min-h-screen"
-      }`}
+      className="relative w-full min-h-screen flex items-center justify-center bg-[#0a192f] px-4 sm:px-6 pt-28 pb-16 md:px-10 overflow-hidden"
       aria-labelledby="home-heading"
     >
       {/* Subtle Ambient Glow */}

@@ -52,8 +52,6 @@ export const translations = {
       availability: "Open to Remote / Hybrid",
       quote: "“Data turns experience into insight.”",
       quoteSub: "End-to-End Analytics • Validation • BI Storytelling",
-      snapshotTitle: "ATP 2024 • ANALYTICS SNAPSHOT",
-      surfaceLabel: "Win Rate by Surface",
     },
     about: {
       heading: "About Me",
@@ -315,8 +313,6 @@ export const translations = {
       availability: "Offen für Remote / Hybrid",
       quote: "„Daten verwandeln Erfahrung in Erkenntnis.“",
       quoteSub: "End-to-End-Analytik • Datenvalidierung • BI Storytelling",
-      snapshotTitle: "ATP 2024 • ANALYTICS SNAPSHOT",
-      surfaceLabel: "Siegquote nach Belag",
     },
     about: {
       heading: "Über mich",

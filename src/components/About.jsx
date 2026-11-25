@@ -2,7 +2,7 @@ import { FaChartBar, FaCode, FaRocket, FaTrophy } from "react-icons/fa";
 import FadeIn from "./FadeIn.jsx";
 import { translations } from "../data/translations";
 
-const About = ({ isNavOpen, lang = "en" }) => {
+const About = ({ lang = "en" }) => {
   const t = (translations[lang] || translations.en).about;
 
   const renderJourneyIcon = (type) => {
@@ -23,9 +23,7 @@ const About = ({ isNavOpen, lang = "en" }) => {
   return (
     <section
       id="about"
-      className={`w-full ${
-        isNavOpen ? "min-h-[calc(100vh-80px)]" : "min-h-screen"
-      } bg-[#0a192f] text-gray-200 flex items-center justify-center py-20 `}
+      className="w-full min-h-screen bg-[#0a192f] text-gray-200 flex items-center justify-center py-20"
       aria-labelledby="about-heading"
     >
       <div className="w-full md:max-w-[700px] xl:max-w-[1200px] mx-auto px-6">
