@@ -1,36 +1,34 @@
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import { FaChartBar, FaCode } from "react-icons/fa";
 import { FiLinkedin, FiGithub, FiMail, FiAward } from "react-icons/fi";
 import FadeIn from "./FadeIn";
 import CertificateModal from "./CertificateModal.jsx";
 import { translations } from "../data/translations";
-
-const certificates = [
-  {
-    label: "Microsoft DP-600 (Fabric)",
-    href: "/DP-600.png",
-    verifyUrl:
-      "https://learn.microsoft.com/en-us/users/milosmirkovic-3205/credentials/certification/fabric-analytics-engineer-associate?tab=credentials-tab",
-  },
-  {
-    label: "Microsoft PL-300 (Power BI)",
-    href: "/PL-300.png",
-    verifyUrl:
-      "https://learn.microsoft.com/en-us/users/milosmirkovic-3205/credentials/certification/data-analyst-associate?tab=credentials-tab",
-  },
-  {
-    label: "SQL Data Analyst Associate (DataCamp)",
-    href: "/SQL Data Analyst Associate-DataCamp.pdf",
-  },
-  {
-    label: "Web Development (DCI)",
-    href: "/Zertifikat DCI.pdf",
-  },
-];
+import { CERTIFICATES as certificates } from "../data/certificates";
 
 function Contact({ lang = "en" }) {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [activeCert, setActiveCert] = useState(null);
+  const certMenuRef = useRef(null);
+
+  // Close certificate menu on outside click or ESC
+  useEffect(() => {
+    if (!isDropdownOpen) return undefined;
+    const handleOutsideClick = (e) => {
+      if (certMenuRef.current && !certMenuRef.current.contains(e.target)) {
+        setIsDropdownOpen(false);
+      }
+    };
+    const handleKeyDown = (e) => {
+      if (e.key === "Escape") setIsDropdownOpen(false);
+    };
+    document.addEventListener("mousedown", handleOutsideClick);
+    document.addEventListener("keydown", handleKeyDown);
+    return () => {
+      document.removeEventListener("mousedown", handleOutsideClick);
+      document.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [isDropdownOpen]);
   const currentLang = translations[lang] || translations.en;
   const t = currentLang.contact;
   const navT = currentLang.nav;
@@ -119,13 +117,11 @@ function Contact({ lang = "en" }) {
             </a>
           ))}
 
-          <div
-            className="relative"
-            onMouseEnter={() => setIsDropdownOpen(true)}
-            onMouseLeave={() => setIsDropdownOpen(false)}
-            onClick={() => setIsDropdownOpen((prev) => !prev)}
-          >
+          <div className="relative" ref={certMenuRef}>
             <button
+              type="button"
+              onClick={() => setIsDropdownOpen((prev) => !prev)}
+              aria-expanded={isDropdownOpen}
               className="text-slate-400 hover:text-blue-400 transition-all duration-300 transform hover:-translate-y-1 cursor-pointer flex items-center"
               aria-label={navT.certLabel}
               title={navT.certLabel}
@@ -137,6 +133,7 @@ function Contact({ lang = "en" }) {
               <div className="absolute bottom-9 left-1/2 -translate-x-1/2 flex flex-col gap-1.5 bg-[#112240] border border-slate-700 text-white p-2.5 rounded-xl shadow-2xl z-50 w-56 text-left text-xs md:text-sm">
                 {certificates.map((item) => (
                   <button
+                    type="button"
                     key={item.href}
                     onClick={() => {
                       setActiveCert(item);

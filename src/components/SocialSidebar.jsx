@@ -2,29 +2,7 @@ import { useState, useRef, useEffect } from "react";
 import { FiLinkedin, FiGithub, FiMail, FiAward } from "react-icons/fi";
 import CertificateModal from "./CertificateModal.jsx";
 import { translations } from "../data/translations";
-
-const certificates = [
-  {
-    label: "Microsoft DP-600 (Fabric)",
-    href: "/DP-600.png",
-    verifyUrl:
-      "https://learn.microsoft.com/en-us/users/milosmirkovic-3205/credentials/certification/fabric-analytics-engineer-associate?tab=credentials-tab",
-  },
-  {
-    label: "Microsoft PL-300 (Power BI)",
-    href: "/PL-300.png",
-    verifyUrl:
-      "https://learn.microsoft.com/en-us/users/milosmirkovic-3205/credentials/certification/data-analyst-associate?tab=credentials-tab",
-  },
-  {
-    label: "SQL Data Analyst Associate (DataCamp)",
-    href: "/SQL Data Analyst Associate-DataCamp.pdf",
-  },
-  {
-    label: "Web Development (DCI)",
-    href: "/Zertifikat DCI.pdf",
-  },
-];
+import { CERTIFICATES as certificates } from "../data/certificates";
 
 function SocialSidebar({ lang = "en" }) {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
@@ -122,7 +100,7 @@ function SocialSidebar({ lang = "en" }) {
           >
             <button
               type="button"
-              onClick={() => setIsDropdownOpen((prev) => !prev)}
+              onClick={openDropdown}
               aria-expanded={isDropdownOpen}
               className="text-slate-400 hover:text-blue-400 transition-all duration-300 transform hover:-translate-y-1 block p-1 cursor-pointer"
               aria-label={navT.certLabel}

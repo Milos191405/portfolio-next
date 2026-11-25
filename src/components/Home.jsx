@@ -13,24 +13,7 @@ import { Link as ScrollLink } from "react-scroll";
 import FadeIn from "./FadeIn.jsx";
 import CertificateModal from "./CertificateModal.jsx";
 import { translations } from "../data/translations";
-
-// Map certificate codes to files in public/ and official verification URLs
-const CERT_DATA = {
-  "DP-600": {
-    href: "/DP-600.png",
-    verifyUrl:
-      "https://learn.microsoft.com/en-us/users/milosmirkovic-3205/credentials/certification/fabric-analytics-engineer-associate?tab=credentials-tab",
-  },
-  "PL-300": {
-    href: "/PL-300.png",
-    verifyUrl:
-      "https://learn.microsoft.com/en-us/users/milosmirkovic-3205/credentials/certification/data-analyst-associate?tab=credentials-tab",
-  },
-  SQL: {
-    href: "/SQL Data Analyst Associate-DataCamp.pdf",
-    verifyUrl: "",
-  },
-};
+import { CERT_BY_CODE } from "../data/certificates";
 
 function Home({ lang = "en" }) {
   const [activeCert, setActiveCert] = useState(null);
@@ -205,7 +188,7 @@ function Home({ lang = "en" }) {
                 <div className="flex flex-col gap-2.5">
                   {t.certifications.map((cert, idx) => {
                     const isSql = cert.code === "SQL";
-                    const certInfo = CERT_DATA[cert.code];
+                    const certInfo = CERT_BY_CODE[cert.code];
                     const isClickable =
                       !cert.inProgress && Boolean(certInfo?.href);
 
