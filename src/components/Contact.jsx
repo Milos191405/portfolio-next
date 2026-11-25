@@ -1,3 +1,5 @@
+"use client";
+
 import { useState, useRef, useEffect } from "react";
 import { FaChartBar, FaCode } from "react-icons/fa";
 import { FiLinkedin, FiGithub, FiMail, FiAward } from "react-icons/fi";

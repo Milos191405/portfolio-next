@@ -1,4 +1,7 @@
+"use client";
+
 import { useState, useEffect, useRef } from "react";
+import { useRouter } from "next/navigation";
 import { Link as ScrollLink } from "react-scroll";
 import { FaArrowUp, FaDownload, FaGlobe, FaChevronDown } from "react-icons/fa";
 import { FiLinkedin, FiGithub, FiMail } from "react-icons/fi";
@@ -6,7 +9,8 @@ import Logo from "../assets/MLogo2.png";
 import { translations } from "../data/translations";
 import { useScrollLock } from "../hooks/useScrollLock";
 
-function Navbar({ lang = "en", setLang }) {
+function Navbar({ lang = "en" }) {
+  const router = useRouter();
   const [nav, setNav] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [showScrollToTop, setShowScrollToTop] = useState(false);
@@ -24,9 +28,7 @@ function Navbar({ lang = "en", setLang }) {
   };
 
   const toggleLanguage = () => {
-    if (setLang) {
-      setLang((prev) => (prev === "en" ? "de" : "en"));
-    }
+    router.push(lang === "en" ? "/de" : "/", { scroll: false });
   };
 
   useEffect(() => {
@@ -88,7 +90,7 @@ function Navbar({ lang = "en", setLang }) {
           <div className="flex items-center gap-3">
             <div className="w-10 h-10 rounded-xl bg-[#112240]/90 border border-slate-700/80 p-1.5 flex items-center justify-center shadow-md">
               <img
-                src={Logo}
+                src={Logo.src}
                 alt="Logo"
                 className="w-full h-full object-contain"
               />

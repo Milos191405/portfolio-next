@@ -1,3 +1,5 @@
+"use client";
+
 import { useState } from "react";
 import { FaGithub, FaExternalLinkAlt, FaImages } from "react-icons/fa";
 import FadeIn from "./FadeIn";
@@ -9,7 +11,7 @@ import Properties from "../assets/Work/Properties.png";
 
 // Map project IDs to an array of images for the modal gallery
 const PROJECT_GALLERIES = {
-  wct: [Properties],
+  wct: [Properties.src],
   atp: ["/projects/atp/01-atp.png", "/projects/atp/02-atp.png"],
   bundesliga: [
     "/projects/bundesliga/01-league-overview.png",
@@ -32,7 +34,7 @@ const Work = ({ lang = "en" }) => {
   };
 
   const currentImages =
-    activeProject ? PROJECT_GALLERIES[activeProject.id] || [Bundesliga] : [];
+    activeProject ? PROJECT_GALLERIES[activeProject.id] || [Bundesliga.src] : [];
 
   return (
     <section
@@ -54,7 +56,7 @@ const Work = ({ lang = "en" }) => {
         {/* FEATURED PROJECTS GRID */}
         <div className="grid grid-cols-1 xl:grid-cols-3 gap-6 w-full">
           {t.featuredProjects.map((project, index) => {
-            const gallery = PROJECT_GALLERIES[project.id] || [Bundesliga];
+            const gallery = PROJECT_GALLERIES[project.id] || [Bundesliga.src];
             const thumb = gallery[0];
 
             return (

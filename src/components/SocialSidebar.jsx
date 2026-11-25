@@ -1,3 +1,5 @@
+"use client";
+
 import { useState, useRef, useEffect } from "react";
 import { FiLinkedin, FiGithub, FiMail, FiAward } from "react-icons/fi";
 import CertificateModal from "./CertificateModal.jsx";

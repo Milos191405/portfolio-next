@@ -1,3 +1,5 @@
+"use client";
+
 import { FaChartBar, FaCode, FaDatabase } from "react-icons/fa";
 import FadeIn from "./FadeIn";
 import { translations } from "../data/translations";
