@@ -113,21 +113,23 @@ function SocialSidebar({ lang = "en" }) {
               <div
                 onMouseEnter={openDropdown}
                 onMouseLeave={scheduleCloseDropdown}
-                className="absolute bottom-0 left-9 flex flex-col gap-1.5 bg-[#112240] border border-slate-700 text-white p-2.5 rounded-xl shadow-2xl z-50 w-60 text-xs"
+                className="absolute bottom-0 left-full pl-2 z-50"
               >
-                {certificates.map((item) => (
-                  <button
-                    type="button"
-                    key={item.href}
-                    onClick={() => {
-                      setActiveCert(item);
-                      setIsDropdownOpen(false);
-                    }}
-                    className="text-left px-2.5 py-1.5 rounded-lg hover:bg-blue-600/20 hover:text-blue-400 transition-colors cursor-pointer"
-                  >
-                    {item.label}
-                  </button>
-                ))}
+                <div className="flex flex-col gap-1.5 bg-[#112240] border border-slate-700 text-white p-2.5 rounded-xl shadow-2xl w-60 text-xs">
+                  {certificates.map((item) => (
+                    <button
+                      type="button"
+                      key={item.href}
+                      onClick={() => {
+                        setActiveCert(item);
+                        setIsDropdownOpen(false);
+                      }}
+                      className="text-left px-2.5 py-1.5 rounded-lg hover:bg-blue-600/20 hover:text-blue-400 transition-colors cursor-pointer"
+                    >
+                      {item.label}
+                    </button>
+                  ))}
+                </div>
               </div>
             )}
           </li>

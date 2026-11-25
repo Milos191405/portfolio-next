@@ -10,10 +10,22 @@ function Contact({ lang = "en" }) {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [activeCert, setActiveCert] = useState(null);
   const certMenuRef = useRef(null);
+  const leaveTimerRef = useRef(null);
+
+  const openDropdown = () => {
+    if (leaveTimerRef.current) clearTimeout(leaveTimerRef.current);
+    setIsDropdownOpen(true);
+  };
+
+  const scheduleCloseDropdown = () => {
+    if (leaveTimerRef.current) clearTimeout(leaveTimerRef.current);
+    leaveTimerRef.current = setTimeout(() => {
+      setIsDropdownOpen(false);
+    }, 150);
+  };
 
   // Close certificate menu on outside click or ESC
   useEffect(() => {
-    if (!isDropdownOpen) return undefined;
     const handleOutsideClick = (e) => {
       if (certMenuRef.current && !certMenuRef.current.contains(e.target)) {
         setIsDropdownOpen(false);
@@ -27,8 +39,9 @@ function Contact({ lang = "en" }) {
     return () => {
       document.removeEventListener("mousedown", handleOutsideClick);
       document.removeEventListener("keydown", handleKeyDown);
+      if (leaveTimerRef.current) clearTimeout(leaveTimerRef.current);
     };
-  }, [isDropdownOpen]);
+  }, []);
   const currentLang = translations[lang] || translations.en;
   const t = currentLang.contact;
   const navT = currentLang.nav;
@@ -102,7 +115,7 @@ function Contact({ lang = "en" }) {
           </a>
         </FadeIn>
 
-        <div className="flex flex-wrap justify-center items-center gap-6 mt-12">
+        <div className="flex flex-wrap justify-center items-center gap-2 mt-12">
           {socialLinks.map(({ href, label, icon }) => (
             <a
               key={label}
@@ -111,39 +124,51 @@ function Contact({ lang = "en" }) {
               rel="noopener noreferrer"
               aria-label={label}
               title={label}
-              className="text-slate-400 hover:text-blue-400 transition-all duration-300 transform hover:-translate-y-1"
+              className="group p-3 rounded-lg text-slate-400 hover:text-blue-400 hover:bg-blue-500/10 transition-colors duration-300"
             >
-              {icon}
+              {/* Only the icon moves, the clickable area stays in place */}
+              <span className="block transition-transform duration-300 group-hover:-translate-y-1">
+                {icon}
+              </span>
             </a>
           ))}
 
-          <div className="relative" ref={certMenuRef}>
+          <div
+            className="relative"
+            ref={certMenuRef}
+            onMouseEnter={openDropdown}
+            onMouseLeave={scheduleCloseDropdown}
+          >
             <button
               type="button"
               onClick={() => setIsDropdownOpen((prev) => !prev)}
               aria-expanded={isDropdownOpen}
-              className="text-slate-400 hover:text-blue-400 transition-all duration-300 transform hover:-translate-y-1 cursor-pointer flex items-center"
+              className="group p-3 rounded-lg text-slate-400 hover:text-blue-400 hover:bg-blue-500/10 transition-colors duration-300 cursor-pointer flex items-center"
               aria-label={navT.certLabel}
               title={navT.certLabel}
             >
-              <FiAward size={22} strokeWidth={1.75} />
+              <span className="block transition-transform duration-300 group-hover:-translate-y-1">
+                <FiAward size={22} strokeWidth={1.75} />
+              </span>
             </button>
 
             {isDropdownOpen && (
-              <div className="absolute bottom-9 left-1/2 -translate-x-1/2 flex flex-col gap-1.5 bg-[#112240] border border-slate-700 text-white p-2.5 rounded-xl shadow-2xl z-50 w-56 text-left text-xs md:text-sm">
-                {certificates.map((item) => (
-                  <button
-                    type="button"
-                    key={item.href}
-                    onClick={() => {
-                      setActiveCert(item);
-                      setIsDropdownOpen(false);
-                    }}
-                    className="text-left px-2.5 py-1.5 rounded-lg hover:bg-blue-600/20 hover:text-blue-400 transition-colors cursor-pointer"
-                  >
-                    {item.label}
-                  </button>
-                ))}
+              <div className="absolute bottom-full left-1/2 -translate-x-1/2 pb-2 z-50">
+                <div className="flex flex-col gap-1.5 bg-[#112240] border border-slate-700 text-white p-2.5 rounded-xl shadow-2xl w-56 text-left text-xs md:text-sm">
+                  {certificates.map((item) => (
+                    <button
+                      type="button"
+                      key={item.href}
+                      onClick={() => {
+                        setActiveCert(item);
+                        setIsDropdownOpen(false);
+                      }}
+                      className="text-left px-2.5 py-1.5 rounded-lg hover:bg-blue-600/20 hover:text-blue-400 transition-colors cursor-pointer"
+                    >
+                      {item.label}
+                    </button>
+                  ))}
+                </div>
               </div>
             )}
           </div>
